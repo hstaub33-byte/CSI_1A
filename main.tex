@@ -1,0 +1,626 @@
+% ======================================================================
+%  Présentation — mood du poster "Photocathode / réduction du CO2"
+%  Format 16:9, français, structure à remplir.
+%  Compilation : pdflatex presentation.tex  (2 passes)
+% ======================================================================
+\documentclass[aspectratio=169,9pt]{beamer}
+
+\usepackage[french,provide=*]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{chemformula}   % pour \ch{CO2}, \ch{H2O}, etc.
+\usetikzlibrary{arrows.meta,positioning,decorations.pathmorphing}
+
+
+\definecolor{pvITO}{RGB}{210,225,245}
+\definecolor{pvCIGS}{RGB}{185,210,240}
+\definecolor{pvZnO}{RGB}{160,195,235}
+\definecolor{pvCdS}{RGB}{135,180,230}
+\definecolor{pvMetal}{RGB}{105,145,205}
+
+\definecolor{pvTop}{RGB}{95,120,210}
+\definecolor{pvSide}{RGB}{35,65,145}
+\definecolor{pvSun}{RGB}{255,222,33}
+\definecolor{pvFlux}{RGB}{245,160,30}
+
+\newcommand{\pvblock}[6]{%
+% #1 x, #2 y, #3 w, #4 h, #5 label, #6 front color
+  \fill[#6] (#1,#2) rectangle ++(#3,#4);
+  \fill[pvTop] (#1,#2+#4) -- ++(0.18,0.10) -- ++(#3,0) -- ++(-0.18,-0.10) -- cycle;
+  \fill[pvSide] (#1+#3,#2) -- ++(0.18,0.10) -- ++(0,#4) -- ++(-0.18,-0.10) -- cycle;
+  \node[font=\scriptsize\bfseries,text=yellow!90!orange] at ({#1+0.5*#3},{#2+0.5*#4}) {#5};
+}
+
+
+\usetheme{Photocathode}
+
+% ----- Métadonnées ----------------------------------------------------
+\title{Modélisation d'une photocathode pour la production de carburants
+       solaires par photosynthèse artificielle}
+\author{STAUB Hélène}
+\institute{Encadrement : J-F.~Cornet, T.~Vourc'h, J.~Dauchet, F.~Gros}
+\date{\today}
+
+% Titre court affiché en pied de page
+\makeatletter
+\def\insertshorttitle{CSI première année de thèse}
+\makeatother
+
+\begin{document}
+
+% ====================== PAGE DE TITRE =================================
+{\setbeamertemplate{footline}{}
+\begin{frame}[plain]
+  \titlepage
+\end{frame}}
+
+% ====================== PLAN (automatique) ===========================
+\begin{frame}{Plan}
+  \vspace{0.5cm}
+  \vfill
+  \tableofcontents
+  \vfill
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=south east] at ($(current page.south east)+(-1,1)$)
+      {\includegraphics[width=4.5cm]{soleil.png}};
+  \end{tikzpicture}%
+\end{frame}
+
+
+% ====================== CONTEXTE =====================================
+\section{Contexte}
+
+\newsavebox{\cardbox}
+
+\begin{frame}[t]{Contexte}
+  \vspace{0.4em}
+  % ---------- Première ligne : 420 ppm + double enjeu ----------------
+  \savebox{\cardbox}{%
+    \begin{minipage}{0.32\textwidth}
+      \begin{pccard}
+        \centering
+        \vspace{0.3em}
+        \pckeyfig{420~ppm}{Concentration actuelle de \ch{CO2} dans l'atmosphère}
+        \vspace{0.3em}
+      \end{pccard}
+    \end{minipage}}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.32\textwidth}
+      \usebox{\cardbox}
+    \column{0.66\textwidth}
+      \vspace*{-0.55cm}
+        \begin{pcbanner}{Un double enjeu : carbone et énergie}
+          \begin{itemize}\footnotesize
+            \item Demande énergétique mondiale croissante
+            \item Certains secteurs difficiles à électrifier
+                  (aviation $\rightarrow$ kérosène)
+            \item Énergie solaire intermittente et difficile à stocker
+            \item Valoriser le \ch{CO2} en molécules d'intérêt
+                  $\rightarrow$ stockage de l'énergie solaire sous forme chimique
+          \end{itemize}
+        \end{pcbanner}
+  \end{columns}
+
+  % ---------- Deuxième ligne : schéma (gauche, large) + GASPER -------
+  \vspace{0.5em}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.56\textwidth}
+      \begin{pcbanner}{Du \ch{CO2} aux carburants}
+        \centering
+        \includegraphics[width=0.98\linewidth]{schema_contexte.png}
+      \end{pcbanner}
+    \column{0.42\textwidth}
+\begin{pcbanner}{Projet ANR GASPER}
+  \begin{itemize}\footnotesize
+    \item Réduire le \ch{CO2} en \ch{CO} à l'aide d'une photocathode
+    \item 6 laboratoires impliqués
+    \item Élaboration, caractérisation et tests des photoélectrodes
+    \item Photoélectrodes efficaces, sélectives et stables
+  \end{itemize}
+\end{pcbanner}
+  \end{columns}
+\end{frame}
+
+
+% ====================== PRÉSENTATION DE LA PHOTOCATHODE ======================
+
+\section{Présentation de la photocathode}
+
+\begin{frame}[t]{Présentation de la photocathode}
+
+  \vspace{0.3em}
+
+  \begin{columns}[T,onlytextwidth]
+
+    % ------------------ Colonne gauche ------------------
+    \column{0.54\textwidth}
+
+      \begin{pcbanner}{Réactions mises en jeu}
+        \footnotesize
+        \vspace{0.4em}
+        \textbf{\color{pcNavy!70}Anode}\\[0.3em]
+        \centerline{\normalsize\ch{H2O -> 2 H+ + 2 e- + 1/2 O2}}\\[0.9em]
+        \textbf{\color{pcNavy}Cathode}\\[0.3em]
+        \centerline{\normalsize\ch{CO2 + 2 H+ + 2 e- -> CO + H2O}}
+      \end{pcbanner}
+
+      \vspace{0.4em}
+
+      \begin{pcbanner}{Principe}
+        \begin{itemize}\footnotesize
+          \item Deux parties : photovoltaïque + électrochimique
+          \item Soleil $\rightarrow$ charges électriques (partie PV)
+          \item Charges $\rightarrow$ réduction du \ch{CO2} (partie électrochimique)
+        \end{itemize}
+      \end{pcbanner}
+
+    % ------------------ Colonne droite ------------------
+    \column{0.55\textwidth}
+
+      \centering
+
+      \hspace*{-0.75cm}\includegraphics[
+        width=1.2\linewidth
+      ]{photocathode.png}
+
+  \end{columns}
+
+\end{frame}
+
+
+% ====================== OBJECTIFS =====================================
+\section{Objectifs}
+
+\begin{frame}[t]{Objectifs}
+
+  \vspace{-0.75em}
+
+  \begin{pcbanner}{Ma contribution dans GASPER}
+    \centering
+    \footnotesize
+      Les partenaires réalisent l'élaboration, la caractérisation et les tests des dispositifs ;
+  ma thèse porte sur la \textbf{modélisation de la photocathode}.
+  \end{pcbanner}
+
+  \vspace{0.1em}
+
+  \begin{pcbanner}{Démarche de modélisation}
+    \centering
+
+    \begin{tikzpicture}[
+      >=Stealth,
+      node distance=0.8cm,
+      objective/.style={
+        draw=pcSky,
+        fill=pcSkyLight,
+        rounded corners=7pt,
+        minimum width=2.6cm,
+        minimum height=1.1cm,
+        align=center,
+        text=pcNavy,
+        font=\footnotesize\bfseries
+      },
+      arrow/.style={
+        ->,
+        thick,
+        draw=pcBlue
+      }
+    ]
+
+      \node[objective] (mod) {Modéliser\\les sous-parties};
+
+      \node[objective, right=of mod] (val)
+        {Valider\\avec l'expérimental};
+
+      \node[objective, right=of val] (coup)
+        {Coupler\\les modèles};
+
+      \node[objective, right=of coup] (opt)
+        {Optimiser\\la photocathode};
+
+      \draw[arrow] (mod) -- (val);
+      \draw[arrow] (val) -- (coup);
+      \draw[arrow] (coup) -- (opt);
+
+    \end{tikzpicture}
+
+    \vspace{0.5em}
+
+    \footnotesize
+    \textcolor{pcNavy}{
+      Partie photovoltaïque
+      \hspace{1em}+\hspace{1em}
+      Partie électrochimique
+      \hspace{1em}$\rightarrow$\hspace{1em}
+      modèle complet
+    }
+
+  \end{pcbanner}
+
+  \vspace{0.1em}
+
+\begin{pcbanner}{Finalité}
+  \centering
+  \footnotesize
+  Utiliser le modèle pour guider la conception de photocathodes
+  plus performantes et limiter les essais expérimentaux.
+\end{pcbanner}
+
+\end{frame}
+
+% ====================== MODÈLES =====================================
+\section{Modèles}
+
+% ====================== MODÈLES : PARTIE PHOTOVOLTAÏQUE =====================
+
+
+\begin{frame}[t]{Modèles : partie photovoltaïque}
+
+  \vspace{-1em}
+
+  \begin{columns}[T,onlytextwidth]
+
+    % ----------- Schéma -----------
+    \column{0.48\textwidth}
+\begin{pccard}
+  \centering
+  \begin{tikzpicture}[x=1cm,y=1cm,scale=0.84,transform shape,>=Stealth]
+
+    % Soleil
+    
+    \fill[pvSun!38] (0.6,4.0) circle (0.48);
+    \fill[pvSun!90] (0.6,4.0) circle (0.33);
+
+    % Couches : proportions mieux respectées
+\pvblock{2.10}{1.20}{0.58}{2.00}{}{pvITO}
+\pvblock{2.74}{1.28}{1.18}{2.00}{}{pvCIGS}
+\pvblock{4.02}{1.36}{0.34}{2.00}{}{pvZnO}
+\pvblock{4.46}{1.44}{0.38}{2.00}{}{pvCdS}
+\pvblock{4.94}{1.52}{0.58}{2.00}{}{pvMetal}
+
+    % Labels remis à la main pour mieux les contrôler
+\node[font=\scriptsize\bfseries,text=yellow!90!orange] at (2.39,2.20) {ITO};
+\node[font=\scriptsize\bfseries,text=yellow!90!orange] at (3.33,2.28) {CIGS};
+\node[font=\tiny\bfseries,text=yellow!90!orange,rotate=90] at (4.19,2.36) {ZnO};
+\node[font=\tiny\bfseries,text=yellow!90!orange,rotate=90] at (4.65,2.44) {CdS};
+\node[font=\scriptsize\bfseries,text=yellow!90!orange] at (5.23,2.52) {Métal};
+
+    % Flux solaire
+    \draw[->,draw=pvSun,line width=1.2pt]
+      (1.10,3.25) .. controls (1.35,2.80) and (1.65,2.45) .. (2.00,2.20);
+
+    \node[align=center,font=\scriptsize\bfseries,text=pvFlux]
+      at (0.8,2.8) {Flux\\solaire};
+
+    % e- depuis l'anode
+    \draw[->,draw=pvSun,line width=1.2pt]
+      (0.95,1.10) .. controls (1.30,0.95) and (1.60,1.00) .. (2.00,1.18);
+
+    \node[align=center,font=\scriptsize\bfseries,text=pvFlux]
+      at (0.82,1.55) {$e^-$ depuis\\l'anode};
+
+    % e- vers la catalyse
+    \draw[->,draw=pvSun,line width=1.2pt]
+      (5.90,2.50) .. controls (6,2.5) and (6.3,2.3) .. (7,2.95);
+
+    \node[align=center,font=\scriptsize\bfseries,text=pvFlux]
+      at (6.35,2.1) {$e^-$ vers\\catalyse};
+
+  \end{tikzpicture}
+
+  {\scriptsize\bfseries\color{pcNavy}
+ Représentation de la partie photovoltaïque}
+
+\end{pccard}
+
+\begin{pcbanner}{Démarche}
+        \begin{itemize}\footnotesize
+          \item Comparer les deux approches
+          \item Confronter les résultats à l'expérimental
+        \end{itemize}
+      \end{pcbanner}
+
+    % ----------- Approches -----------
+    
+    \column{0.48\textwidth}
+\vspace{-0.5em}
+\begin{pcbanner}{Deux approches de modélisation}
+  \vspace{0.45em}
+  \begin{pcbannerlight}{Approche cinétique}
+    \vspace{0.3em}
+    \begin{itemize}\footnotesize
+      \item Suivi local des porteurs de charge et du potentiel électrostatique (Van Roosbroeck)
+      \item Electromagnétisme pour la génération photovoltaïque
+    \end{itemize}
+  \end{pcbannerlight}
+
+  \vspace{0.45em}
+
+  \begin{pcbannerlight}{Bilan détaillé}
+    \vspace{0.3em}
+    \begin{itemize}\footnotesize
+      \item Approche globale par bilans d'énergie et de flux
+      \item Vision plus macroscopique du dispositif
+    \end{itemize}
+  \end{pcbannerlight}
+
+\end{pcbanner}
+
+  \end{columns}
+
+
+\end{frame}
+
+% ---------- Partie électrochimique ----------
+\begin{frame}[t]{Modèles : partie électrochimique}
+  \vspace{-1em}
+
+  \begin{columns}[T,onlytextwidth]
+
+
+        % ----------- Schéma -----------
+    \column{0.48\textwidth}
+\begin{pccard}
+  \centering
+  \begin{tikzpicture}[x=1cm,y=1cm,scale=0.84,transform shape,>=Stealth]
+
+    % Soleil
+    
+    \fill[pvSun!38] (0.6,4.0) circle (0.48);
+    \fill[pvSun!90] (0.6,4.0) circle (0.33);
+
+    % Couches : proportions mieux respectées
+\pvblock{2.10}{1.20}{0.58}{2.00}{}{pvITO}
+\pvblock{2.74}{1.28}{1.18}{2.00}{}{pvCIGS}
+\pvblock{4.02}{1.36}{0.34}{2.00}{}{pvZnO}
+\pvblock{4.46}{1.44}{0.38}{2.00}{}{pvCdS}
+\pvblock{4.94}{1.52}{0.58}{2.00}{}{pvMetal}
+
+    % Labels remis à la main pour mieux les contrôler
+\node[font=\scriptsize\bfseries,text=yellow!90!orange] at (2.39,2.20) {ITO};
+\node[font=\scriptsize\bfseries,text=yellow!90!orange] at (3.33,2.28) {CIGS};
+\node[font=\tiny\bfseries,text=yellow!90!orange,rotate=90] at (4.19,2.36) {ZnO};
+\node[font=\tiny\bfseries,text=yellow!90!orange,rotate=90] at (4.65,2.44) {CdS};
+\node[font=\scriptsize\bfseries,text=yellow!90!orange] at (5.23,2.52) {Métal};
+
+    % Flux solaire
+    \draw[->,draw=pvSun,line width=1.2pt]
+      (1.10,3.25) .. controls (1.35,2.80) and (1.65,2.45) .. (2.00,2.20);
+
+    \node[align=center,font=\scriptsize\bfseries,text=pvFlux]
+      at (0.8,2.8) {Flux\\solaire};
+
+    % e- depuis l'anode
+    \draw[->,draw=pvSun,line width=1.2pt]
+      (0.95,1.10) .. controls (1.30,0.95) and (1.60,1.00) .. (2.00,1.18);
+
+    \node[align=center,font=\scriptsize\bfseries,text=pvFlux]
+      at (0.82,1.55) {$e^-$ depuis\\l'anode};
+
+    % e- vers la catalyse
+    \draw[->,draw=pvSun,line width=1.2pt]
+      (5.90,2.50) .. controls (6,2.5) and (6.3,2.3) .. (7,2.95);
+
+    \node[align=center,font=\scriptsize\bfseries,text=pvFlux]
+      at (6.35,2.1) {$e^-$ vers\\catalyse};
+
+  \end{tikzpicture}
+
+  {\scriptsize\bfseries\color{pcNavy}
+ C'est clairement pas le bon schéma}
+
+\end{pccard}
+
+ \column{0.48\textwidth}
+\vspace{-0.5em}
+\begin{pcbanner}{Différents angles d'approche}
+  \vspace{0.45em}
+  \begin{pcbannerlight}{Apport du CO2}
+    \vspace{0.3em}
+    \begin{itemize}\footnotesize
+          \item Bullage dans l'électrolyte 
+          \item Electrode à diffusion de gaz (GDE)
+    \end{itemize}
+  \end{pcbannerlight}
+
+  \vspace{0.45em}
+
+  \begin{pcbannerlight}{Géométrie de l'électrode}
+    \vspace{0.3em}
+    \begin{itemize}\footnotesize
+      \item Modèle 3D local 
+      \item Modèle 1D macroscopique
+    \end{itemize}
+  \end{pcbannerlight}
+
+\end{pcbanner}
+\end{columns}
+
+
+  \vspace{0.7em}
+  \begin{columns}[T,onlytextwidth]
+    \column{\textwidth}
+      \begin{pcbanner}{Démarche}
+        \begin{itemize}\footnotesize
+          \item Comparer 1D et 3D (homogénéisation)
+          \item Comparer les deux configurations (électrode à diffusion de gaz / bullage dans l'électrolyte)
+          \item Confronter à l'expérimental (partenaires GASPER)
+        \end{itemize}
+      \end{pcbanner}
+  \end{columns}
+
+\end{frame}
+
+% ====================== BILAN PREMIÈRE ANNÉE ======================
+% ---------- BILAN : BRIQUE SEMI-CONDUCTEUR ----------
+\section{Bilan sur la première année}
+\begin{frame}[t]{Bilan : brique photovoltaïque}
+  \vspace{0.3em}
+  \begin{center}
+    {\footnotesize\color{pcNavy!70}Solveur drift-diffusion 1D développé en C, basé sur Van Roosbroeck}
+  \end{center}
+  \vspace{0.15em}
+
+  \begin{columns}[T,onlytextwidth]
+    \column{0.48\textwidth}
+      \begin{pcbanner}{Ce que j'ai construit}
+        \begin{itemize}\footnotesize
+          \item Solveur 1D : Poisson + deux continuités
+          \item Absorption, génération, collecte des porteurs
+          \item Recombinaisons SRH, Auger, radiatif
+        \end{itemize}
+      \end{pcbanner}
+    \column{0.48\textwidth}
+      \begin{pcbanner}{Jalons clés}
+        \begin{itemize}\footnotesize
+          \item 1\textsuperscript{re} version : Newton stationnaire, adimensionnée
+          \item Blocage à la photogénération
+          \item Levé par passage en résolution transitoire
+        \end{itemize}
+      \end{pcbanner}
+  \end{columns}
+
+  \vspace{0.3em}
+  \begin{columns}[T,onlytextwidth]
+    \column{\textwidth}
+      \begin{pcbanner}{Validation}
+        \begin{itemize}\footnotesize
+          \item Cas sans génération : accord avec Farrell et al.
+          \item Comparaison avec SCAPS 1D
+        \end{itemize}
+      \end{pcbanner}
+  \end{columns}
+\end{frame}
+
+% ---------- BILAN : BRIQUE ÉLECTROCHIMIQUE ----------
+\begin{frame}[t]{Bilan : brique électrochimique}
+  \vspace{0.3em}
+  \begin{center}
+    {\footnotesize\color{pcNavy!70}Modèle homogénéisé, de l'échelle du pore au 1D macroscopique}
+  \end{center}
+  \vspace{0.15em}
+
+  \begin{columns}[T,onlytextwidth]
+    \column{0.48\textwidth}
+      \begin{pcbanner}{Ce que j'ai construit}
+        \begin{itemize}\footnotesize
+          \item Modèle 3D local : Nernst--Planck, loi d'Ohm, Butler--Volmer
+          \item Réduction 1D par homogénéisation (coefficients effectifs)
+        \end{itemize}
+      \end{pcbanner}
+    \column{0.48\textwidth}
+      \begin{pcbanner}{Jalons clés}
+        \begin{itemize}\footnotesize
+          \item Étude bibliographique (lois de vitesse)
+          \item Modèle de Thiele en cas limite (facteur d'efficacité)
+          \item Revue des phénomènes influençant l'électrode
+        \end{itemize}
+      \end{pcbanner}
+  \end{columns}
+
+  \vspace{0.3em}
+  \begin{columns}[T,onlytextwidth]
+    \column{\textwidth}
+      \begin{pcbanner}{Validation}
+        \begin{itemize}\footnotesize
+          \item Cas test \ch{CO2 -> CO}
+        \end{itemize}
+      \end{pcbanner}
+  \end{columns}
+\end{frame}
+
+% ====================== PERSPECTIVES ======================
+% ---------- PERSPECTIVES 1 : COMPLÉTER ET CONSTRUIRE ----------
+\section{Perspectives}
+\begin{frame}[t]{Perspectives : compléter et construire}
+  \vspace{0.4em}
+
+  \begin{columns}[T,onlytextwidth]
+    \column{0.48\textwidth}
+      \begin{pcbanner}{Compléter le semi-conducteur}
+        \begin{itemize}\footnotesize
+          \item Ajouter les hétérojonctions
+          \item Revoir les conditions aux limites
+          \item Valider sur les données de l'ANR
+        \end{itemize}
+      \end{pcbanner}
+    \column{0.48\textwidth}
+      \begin{pcbanner}{Compléter l'électrochimique}
+        \begin{itemize}\footnotesize
+          \item Partie hors du milieu poreux + modèle GDE
+          \item Vérifier la loi de vitesse (données ANR)
+          \item Intégrer des phénomènes fins (HER, pH, double couche\dots)
+        \end{itemize}
+      \end{pcbanner}
+  \end{columns}
+
+  \vspace{0.35em}
+  \begin{columns}[T,onlytextwidth]
+    \column{\textwidth}
+      \begin{pcbanner}{Construire de nouvelles briques}
+        \begin{itemize}\footnotesize
+          \item Génération optique : modélisation électromagnétique
+          \item \textit{Detailed balance} : approche alternative (semi-conducteur)
+        \end{itemize}
+      \end{pcbanner}
+  \end{columns}
+\end{frame}
+
+% ---------- PERSPECTIVES 2 : COUPLER ET OPTIMISER ----------
+\begin{frame}[t]{Perspectives : coupler et optimiser}
+  \vspace{0.4em}
+
+  \begin{pcbanner}{Coupler les briques}
+    \begin{itemize}\footnotesize
+      \item Articuler les briques une fois complétées et validées
+      \item Commencer par l'interface semi-conducteur / électrolyte
+    \end{itemize}
+  \end{pcbanner}
+
+  \vspace{0.8em}
+
+  \begin{pcbanner}{Objectif final : un outil d'optimisation}
+    \begin{itemize}\footnotesize
+      \item Modèle couplé et prédictif $\rightarrow$ explorer l'espace des géométries
+      \item Épaisseurs, structure poreuse, aire catalytique
+      \item Maximiser le courant et le rendement de production de \ch{CO}
+    \end{itemize}
+  \end{pcbanner}
+\end{frame}
+
+% ====================== RÉFÉRENCES =================================
+% \section{Références}
+
+% \begin{frame}{Références}
+%   \begin{pccard}
+%     \small
+%     \begin{enumerate}
+%       \item Farrell, Rotundo, Doan, Kantner, Fuhrmann, Koprucki,
+%             \emph{Drift-Diffusion Models}, in \emph{Handbook of
+%             Optoelectronic Device Modeling and Simulation}, vol. 2,
+%             J. Piprek (éd.), CRC Press, 2017, pp. 733--771.
+%       \item Le, Lasseux, Zhang, et al., \emph{Multiscale Modelling of
+%             Diffusion and Enzymatic Reaction in Porous Electrodes\dots},
+%             \emph{Chemical Engineering Science} 248 (2022): 117157.
+%       \item Vossier, Gualdi, Dollet, Ares, Aimez, \emph{Approaching the
+%             Shockley–Queisser Limit\dots}, \emph{J. Appl. Phys.} 117,
+%             n\textsuperscript{o}1 (2015): 015102.
+%     \end{enumerate}
+%   \end{pccard}
+% \end{frame}
+
+% ====================== FIN =======================================
+{\setbeamertemplate{footline}{}
+\begin{frame}[plain]
+  \centering
+  \vspace{5em}
+  {\Huge\bfseries\color{pcNavy}Merci de votre attention}\\[0.4cm]
+  {\color{pcBlue}Avez vous des questions ?}
+    \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=south east] at ($(current page.south east)+(-1,1)$)
+      {\includegraphics[width=4.5cm]{soleil.png}};
+  \end{tikzpicture}%
+\end{frame}}
+
+\end{document}

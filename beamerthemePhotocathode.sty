@@ -1,0 +1,223 @@
+% ======================================================================
+%  beamerthemePhotocathode.sty
+%  Thème Beamer inspiré du poster Canva "Photocathode / CO2 reduction"
+%  Ambiance : ciel bleu clair, blocs blancs arrondis, bannières-rubans,
+%  palette bleu ciel / bleu marine. Titres en Montserrat gras.
+%  (Soleils retirés — la commande \pcsun reste dispo pour plus tard.)
+% ======================================================================
+\ProvidesPackage{beamerthemePhotocathode}[2026/09/08 Photocathode poster mood]
+
+\RequirePackage{tikz}
+\RequirePackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadows.blur,calc,positioning,arrows.meta}
+
+% ----------------------------------------------------------------------
+%  Police des titres : Montserrat gras.
+% ----------------------------------------------------------------------
+\RequirePackage{montserrat}
+\renewcommand*\familydefault{\sfdefault}
+
+% Raccourci "titre en Montserrat gras"
+\newcommand{\pctitlefont}{\bfseries}
+
+% ----------------------------------------------------------------------
+%  Palette (reprise du poster)
+% ----------------------------------------------------------------------
+\definecolor{pcNavy}{RGB}{20,58,110}       % titres bleu marine
+\definecolor{pcBlue}{RGB}{51,130,200}       % bleu moyen
+\definecolor{pcSky}{RGB}{135,196,235}       % bannières bleu ciel
+\definecolor{pcSkyLight}{RGB}{209,235,249}   % fonds très clairs
+\definecolor{pcSkyBg}{RGB}{223,241,251}      % fond de page ciel
+\definecolor{pcInk}{RGB}{40,55,75}           % texte courant
+\definecolor{pcSun}{RGB}{250,204,74}         % soleil / accents
+\definecolor{pcSunDeep}{RGB}{243,168,58}
+\definecolor{pcCO}{RGB}{224,86,72}           % rouge (O des molécules CO)
+
+% ----------------------------------------------------------------------
+%  Couleurs Beamer de base
+% ----------------------------------------------------------------------
+\setbeamercolor{normal text}{fg=pcNavy,bg=pcSkyBg}
+\setbeamercolor{structure}{fg=pcNavy}
+\setbeamercolor{alerted text}{fg=pcCO}
+\setbeamercolor{example text}{fg=pcBlue}
+\setbeamercolor{frametitle}{fg=white,bg=pcSky}
+\setbeamercolor{title}{fg=pcNavy}
+\setbeamercolor{author}{fg=pcNavy}
+\setbeamercolor{institute}{fg=pcNavy}
+\setbeamercolor{itemize item}{fg=pcBlue}
+\setbeamercolor{itemize subitem}{fg=pcSky}
+\setbeamercolor{block title}{fg=white,bg=pcSky}
+\setbeamercolor{block body}{fg=pcNavy,bg=white}
+\setbeamercolor{footline}{fg=pcNavy}
+
+% Titre principal et titres de frame en gras
+\setbeamerfont{title}{series=\bfseries,size=\LARGE}
+\setbeamerfont{frametitle}{series=\bfseries,size=\Large}
+\setbeamerfont{author}{series=\bfseries}
+\setbeamerfont{block title}{series=\bfseries}
+
+\setbeamertemplate{navigation symbols}{}
+
+% -- Sommaire automatique : pastilles numérotées bleues, agrandi et aéré --
+\setbeamertemplate{section in toc}{%
+  \leavevmode
+  \begin{tikzpicture}[baseline=(num.base)]
+    \node[circle, fill=pcSky, text=white, font=\pctitlefont\normalsize,
+          minimum size=1.6em, inner sep=0pt] (num) {\inserttocsectionnumber};
+  \end{tikzpicture}%
+  \hspace{0.7em}%
+  {\pctitlefont\Large\color{pcNavy}\inserttocsection}%
+  \par\vskip1.1em}
+\setbeamertemplate{subsection in toc}{}
+\setbeamertemplate{itemize item}{\raisebox{0.15ex}{\tikz\fill[pcBlue] (0,0) circle (1.1pt);}}
+\setbeamertemplate{itemize subitem}{\raisebox{0.15ex}{\tikz\draw[pcSky,line width=0.6pt] (0,0) circle (1pt);}}
+
+% ----------------------------------------------------------------------
+%  Petit soleil souriant — CONSERVÉ pour un usage ultérieur : \pcsun[scale]
+% ----------------------------------------------------------------------
+\newcommand{\pcsun}[1][1]{%
+\begin{tikzpicture}[scale=#1]
+  \foreach \a in {0,30,...,330}{
+    \draw[pcSun,line width=1.6pt,line cap=round]
+      (\a:0.42) -- (\a:0.60);}
+  \shade[ball color=pcSun] (0,0) circle (0.34);
+  \fill[pcSunDeep] (-0.12,0.08) circle (0.028);
+  \fill[pcSunDeep] ( 0.12,0.08) circle (0.028);
+  \draw[pcSunDeep,line width=1pt,line cap=round]
+    (-0.10,-0.06) .. controls (0,-0.16) .. (0.10,-0.06);
+  \fill[pcCO!55,opacity=0.5] (-0.20,-0.02) circle (0.05);
+  \fill[pcCO!55,opacity=0.5] ( 0.20,-0.02) circle (0.05);
+\end{tikzpicture}}
+
+% ----------------------------------------------------------------------
+%  Fond de page : uniquement la photo de ciel
+% ----------------------------------------------------------------------
+\setbeamertemplate{background}{%
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=center,inner sep=0pt] at (current page.center)
+    {\includegraphics[width=\paperwidth,height=\paperheight]{fond_bg.png}};
+\end{tikzpicture}}
+
+% ----------------------------------------------------------------------
+%  Titre de frame : centré, marine, encadré de deux filets (plus de rectangle)
+% ----------------------------------------------------------------------
+\setbeamertemplate{frametitle}{%
+  \vspace{1em}%
+  \noindent
+  \makebox[\linewidth]{%
+    {\color{pcNavy}\leaders\hrule height 1pt\hfill\kern0pt}%
+    \hspace{0.8em}%
+    {\pctitlefont\Huge\color{pcNavy}\insertframetitle}%
+    \hspace{0.8em}%
+    {\color{pcNavy}\leaders\hrule height 1pt\hfill\kern0pt}%
+  }%
+  \vspace{0.2em}%
+}
+
+
+
+% ----------------------------------------------------------------------
+%  Environnement "carte" : bloc blanc arrondi à ombre douce
+% ----------------------------------------------------------------------
+\newtcolorbox{pccard}[1][]{%
+  enhanced, breakable,
+  colback=white, coltext=pcNavy, colframe=pcSkyLight,
+  boxrule=0.8pt, arc=8pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  drop fuzzy shadow=pcSky!40,
+  fonttitle=\pctitlefont\color{pcNavy},
+  #1
+}
+
+% Carte avec bandeau-titre bleu ciel
+\newtcolorbox{pcbanner}[1]{%
+  enhanced, breakable,
+  colback=white, coltext=pcNavy, colframe=pcSkyLight,
+  boxrule=0.8pt, arc=8pt,
+  left=10pt,right=10pt,top=8pt,bottom=8pt,
+  drop fuzzy shadow=pcSky!40,
+  title={#1}, coltitle=white,
+  fonttitle=\pctitlefont,
+  colbacktitle=pcSky,
+  attach boxed title to top left={xshift=8pt,yshift=-8pt},
+  boxed title style={colframe=pcSky,arc=5pt},
+}
+
+% Variante de pcbanner à fond bleu clair (pour boîtes imbriquées dans une carte blanche)
+\newtcolorbox{pcbannerlight}[1]{%
+  enhanced, breakable,
+  colback=pcSun!30,                    % corps : jaune pâle
+  colframe=pcSun!55,                   % bordure : jaune un peu plus soutenu
+  boxrule=0pt, arc=5pt,
+  left=7pt,right=7pt,top=5pt,bottom=5pt,
+  title={#1}, coltitle=pcNavy,         % titre en marine (lisible sur jaune)
+  fonttitle=\pctitlefont\scriptsize,
+  coltext=pcNavy,
+  colbacktitle=pcSun,                  % bandeau-titre : jaune (comme le soleil)
+  attach boxed title to top left={xshift=5pt,yshift=-5pt},
+  boxed title style={colframe=pcSun,arc=3pt},
+}
+
+
+% ----------------------------------------------------------------------
+%  Chiffre-clé "à la 420 ppm"
+% ----------------------------------------------------------------------
+\newcommand{\pckeyfig}[2]{%
+  {\pctitlefont\color{pcNavy}\fontsize{22}{20}\selectfont #1}\\[0.4em]
+  {\color{pcInk}\scriptsize\bfseries #2}}
+
+% ----------------------------------------------------------------------
+%  Pied de page : filet + numéro
+% ----------------------------------------------------------------------
+\setbeamertemplate{footline}{%
+\hbox{}\vskip2pt%
+\hbox to\paperwidth{\hskip0.6cm
+  \color{pcSky}\rule{\dimexpr\paperwidth-1.2cm\relax}{0.8pt}\hskip0.6cm}%
+\vskip-13pt%
+\hbox to\paperwidth{%
+  \hfil
+  {\footnotesize\color{pcNavy}\insertshorttitle}%
+  \hfil
+  \llap{{\footnotesize\color{pcNavy}\insertframenumber/\inserttotalframenumber}\hskip0.7cm}%
+}%
+\vskip4pt}
+
+% ----------------------------------------------------------------------
+%  Page de titre façon Canva : logos en haut, titre centré, auteur en bas,
+%  adresse en bas pleine largeur, soleil à droite.
+% ----------------------------------------------------------------------
+\setbeamertemplate{title page}{%
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north,inner sep=0pt] at ($(current page.north)+(0,-0.45cm)$)
+    {\includegraphics[width=0.94\paperwidth]{logos_row.png}};
+\end{tikzpicture}%
+\vskip1.7cm
+\vskip0.25cm
+\vfill
+\begin{center}
+  \parbox{0.8\paperwidth}{
+    \centering
+    {\pctitlefont\fontsize{20}{28}\selectfont\color{pcNavy}\inserttitle\par}
+  }
+\end{center}
+\vfill
+\vskip1.5cm
+\begin{center}
+  {\pctitlefont\normalsize\color{pcNavy}\insertauthor\par}
+  \vskip0.12cm
+  {\pctitlefont\small\color{pcNavy!80}\insertinstitute\par}
+\end{center}
+\vskip1.2cm
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=south,inner sep=0pt]
+    at ($(current page.south)+(0,0.35cm)$)
+    {\footnotesize\color{pcNavy}%
+     Université Clermont Auvergne, Clermont Auvergne INP, CNRS Institut Pascal, F-63000 Clermont-Ferrand, France};
+\end{tikzpicture}%
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=east] at ($(current page.east)+(-0.8,-1.5)$)
+    {\includegraphics[width=4cm]{soleil.png}};
+\end{tikzpicture}%
+}
+\endinput
