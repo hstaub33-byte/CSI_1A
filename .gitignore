@@ -1,0 +1,28 @@
+# Dépendances
+node_modules/
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# Fichiers de build
+build/
+dist/
+*.o
+*.exe
+*.class
+
+# Environnement / secrets
+.env
+.env.local
+*.log
+
+# Fichiers OS
+.DS_Store
+Thumbs.db
+
+# Éditeurs / IDE
+.vscode/
+.idea/
+*.swp
