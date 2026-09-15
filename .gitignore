@@ -26,3 +26,19 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+
+# LaTeX auxiliaires
+*.aux
+*.log
+*.toc
+*.snm
+*.nav
+*.out
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.vrb

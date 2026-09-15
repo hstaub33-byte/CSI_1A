@@ -1,7 +1,0 @@
-\babel@toc {french}{}\relax 
-\beamer@sectionintoc {1}{Contexte}{3}{0}{1}
-\beamer@sectionintoc {2}{Présentation de la photocathode}{4}{0}{2}
-\beamer@sectionintoc {3}{Objectifs}{5}{0}{3}
-\beamer@sectionintoc {4}{Modèles}{6}{0}{4}
-\beamer@sectionintoc {5}{Bilan sur la première année}{8}{0}{5}
-\beamer@sectionintoc {6}{Perspectives}{10}{0}{6}
