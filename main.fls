@@ -346,6 +346,9 @@ INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\tex\generic\pgf\frontendlaye
 INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\tex\generic\pgf\modules\pgfmoduledecorations.code.tex
 INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\tex\generic\pgf\libraries\decorations\pgflibrarydecorations.pathmorphing.code.tex
 INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\tex\generic\pgf\libraries\decorations\pgflibrarydecorations.pathmorphing.code.tex
+INPUT .\figures.tex
+INPUT .\figures.tex
+INPUT figures.tex
 INPUT .\beamerthemePhotocathode.sty
 INPUT beamerthemePhotocathode.sty
 INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\tex\latex\tcolorbox\tcolorbox.sty
