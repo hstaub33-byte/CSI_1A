@@ -686,6 +686,11 @@ INPUT .\fond_bg.png
 INPUT .\fond_bg.png
 INPUT .\fond_bg.png
 INPUT .\fond_bg.png
+INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\fonts\tfm\public\montserrat\Montserrat-Regular-lf-t1.tfm
+INPUT .\fond_bg.png
+INPUT .\fond_bg.png
+INPUT .\fond_bg.png
+INPUT .\fond_bg.png
 OUTPUT main.nav
 OUTPUT main.toc
 OUTPUT main.snm
@@ -706,6 +711,8 @@ INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\
 INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cmextra\cmex7.pfb
 INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi6.pfb
 INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi6.pfb
+INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi7.pfb
+INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi7.pfb
 INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmss8.pfb
 INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmss8.pfb
 INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy5.pfb

@@ -534,22 +534,22 @@
         label style={font=\scriptsize},
       ]
         % --- Électrons n ---
-         \addplot[pcNavy, thick] table[x=x, y=n_code, col sep=semicolon] {donnees1.csv};
-         \addlegendentry{$n$ (code)}
          \addplot[pcNavy, only marks, mark=o, mark size=1.1pt, each nth point=4]
                  table[x=x, y=n_scaps, col sep=semicolon] {donnees1.csv};
+         \addlegendentry{$n$ (code)}
+         \addplot[pcNavy, thick] table[x=x, y=n_code, col sep=semicolon] {donnees1.csv};
          \addlegendentry{$n$ (SCAPS)}
         % % --- Trous p ---
-        \addplot[red!70!black, thick] table[x=x, y=p_code, col sep=semicolon] {donnees1.csv};
-        \addlegendentry{$p$ (code)}
-        \addplot[red!70!black, only marks, mark=square, mark size=1.1pt, each nth point=4]
+        \addplot[pcSunDeep, only marks, mark=square, mark size=1.1pt, each nth point=4]
                  table[x=x, y=p_scaps, col sep=semicolon] {donnees1.csv};
+        \addlegendentry{$p$ (code)}
+        \addplot[pcSunDeep, thick] table[x=x, y=p_code, col sep=semicolon] {donnees1.csv};
         \addlegendentry{$p$ (SCAPS)}
         \end{axis}
      \end{tikzpicture}
 
      {\scriptsize\bfseries\color{pcNavy}
-      Densités de porteurs : comparaison code / SCAPS-1D}
+      Densités de porteurs en fonction de la position : comparaison code / SCAPS-1D pour CIGS dopé n/CIGS dopé p sans génération}
    \end{pccard}
  \end{frame}
 
@@ -711,5 +711,24 @@
       {\includegraphics[width=4.5cm]{soleil.png}};
   \end{tikzpicture}%
 \end{frame}}
+
+
+\appendix
+
+%==================================================================================================================
+%==================================================== Différentes recombinaisons =======================================================
+%==================================================================================================================
+
+\begin{frame}[t]{Différentes types de recombinaisons}
+  \vspace{-0.5em}
+  \centering
+      \begin{pccard}
+        \centering
+        \figrecombinaison
+        \vspace{0.5em}
+        {\scriptsize\bfseries\color{pcNavy}
+        Différents types de recombinaisons : SRH, radiative et Auger}
+      \end{pccard}
+\end{frame}
 
 \end{document}

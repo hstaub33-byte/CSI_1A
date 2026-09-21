@@ -149,3 +149,72 @@
 %==================================================================================================================
 %======================================Fin Figure démarche modèle==================================================
 %==================================================================================================================
+
+
+%==================================================================================================================
+%======================================Recombinaisonss==================================================
+%==================================================================================================================
+
+
+\newcommand{\figrecombinaison}{%
+\begin{tikzpicture}[
+    >=Latex, font=\small,
+    band/.style={draw=pcInk!45},
+    elec/.style={circle, fill=pcBlue, draw=pcNavy, line width=0.4pt, inner sep=1.7pt},
+    hole/.style={circle, draw=pcSun, fill=white, line width=0.8pt, inner sep=1.4pt},
+    trans/.style={->, thick, pcNavy},
+]
+\def\W{3.0}\def\yc{2.4}\def\yv{0.6}\def\bh{0.55}
+\def\recbandes{%
+  \fill[pcSkyLight] (0,\yc) rectangle (\W,\yc+\bh);
+  \fill[pcCO!15]    (0,\yv-\bh) rectangle (\W,\yv);
+  \draw[band] (0,\yc) rectangle (\W,\yc+\bh);
+  \draw[band] (0,\yv-\bh) rectangle (\W,\yv);
+  \node[font=\scriptsize\bfseries, pcNavy]        at (\W/2,\yc+\bh/2) {BC};
+  \node[font=\scriptsize\bfseries, pcCO!75!black] at (\W/2,\yv-\bh/2) {BV};
+}
+% 1. RADIATIVE
+\begin{scope}[xshift=0cm]
+  \recbandes
+  \node[left, font=\scriptsize, pcInk] at (0,\yc) {$E_c$};
+  \node[left, font=\scriptsize, pcInk] at (0,\yv) {$E_v$};
+  \node[elec] at (0.8,\yc) {}; \node[hole] at (0.8,\yv) {};
+  \draw[trans] (0.8,\yc-0.03) -- (0.8,\yv+0.03);
+  \draw[->, pcSunDeep, thick, decorate,
+        decoration={snake, amplitude=1pt, segment length=6pt, post length=3pt}]
+        (1.05,1.5) -- (2.5,1.5);
+  \node[pcSunDeep, font=\footnotesize] at (2.1,1.85) {$h\nu$};
+  \node[font=\footnotesize\bfseries, pcInk] at (\W/2,-0.85) {Radiative};
+  \node[font=\scriptsize, align=center, text=pcInk!70] at (\W/2,-1.35) {émission\\ d'un photon};
+\end{scope}
+% 2. SRH
+\begin{scope}[xshift=4.3cm]
+  \recbandes
+  \draw[thick, pcInk] (0.85,1.5) -- (2.15,1.5);
+  \node[font=\scriptsize, pcInk] at (\W/2,1.75) {$E_t$};
+  \node[elec] at (1.0,\yc) {}; \node[hole] at (1.0,\yv) {};
+  \draw[trans] (1.0,\yc-0.03) -- (1.05,1.55);
+  \draw[trans] (1.15,1.45) -- (1.0,\yv+0.03);
+  \node[font=\scriptsize, text=pcInk!70] at (2.35,1.0) {phonons};
+  \node[font=\footnotesize\bfseries, pcInk] at (\W/2,-0.85) {SRH};
+  \node[font=\scriptsize, align=center, text=pcInk!70] at (\W/2,-1.35) {assistée par\\ un défaut};
+\end{scope}
+% 3. AUGER
+\begin{scope}[xshift=8.6cm]
+  \recbandes
+  \node[elec] at (0.7,\yc) {}; \node[hole] at (0.7,\yv) {};
+  \draw[trans] (0.7,\yc-0.03) -- (0.7,\yv+0.03);
+  \node[elec] at (2.15,\yc) {};
+  \draw[trans] (2.15,\yc+0.03) -- (2.15,\yc+0.95);
+  \node[font=\scriptsize, align=center, text=pcInk!70] at (2.15,\yc+1.25) {3\textsuperscript{e} porteur};
+  \draw[->, dashed, pcInk!55] (0.9,1.5) .. controls (1.5,2.05) .. (2.1,\yc+0.35);
+  \node[font=\footnotesize\bfseries, pcInk] at (\W/2,-0.85) {Auger};
+  \node[font=\scriptsize, align=center, text=pcInk!70] at (\W/2,-1.35) {énergie à un\\ 3\textsuperscript{e} porteur};
+\end{scope}
+% Légende
+\node[elec] at (2.0,-2.15) {};
+\node[right, font=\scriptsize, pcInk] at (2.15,-2.15) {électron ($e^-$)};
+\node[hole] at (5.4,-2.15) {};
+\node[right, font=\scriptsize, pcInk] at (5.55,-2.15) {trou ($h^+$)};
+\end{tikzpicture}%
+}
