@@ -10,6 +10,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb}
 \usepackage{chemformula}   % pour \ch{CO2}, \ch{H2O}, etc.
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 \usetikzlibrary{arrows.meta,positioning,decorations.pathmorphing}
 \input{figures.tex}
 
@@ -194,7 +196,6 @@
 %==================================================================================================================
 %==================================================== Objectifs ===================================================
 %==================================================================================================================
-
 \section{Objectifs}
 
 \begin{frame}[t]{Objectifs}
@@ -242,12 +243,13 @@
 
 %------------------------------------------------------------------------------------------------------------------
 
-% ====================== MODÈLES =====================================
+%==================================================================================================================
+%==================================================== Modèles =====================================================
+%==================================================================================================================
+
 \section{Modèles}
 
-% ====================== MODÈLES : PARTIE PHOTOVOLTAÏQUE =====================
-
-
+% -------------------------------------- Modèles : Partie photovoltaïque ------------------------------------------
 \begin{frame}[t]{Modèles : partie photovoltaïque}
 
   \vspace{-1em}
@@ -303,67 +305,176 @@
 
 \end{frame}
 
-% ---------- Partie électrochimique ----------
+%------------------------------------------------------------------------
+
+\begin{frame}[t]{Modèles : partie photovoltaïque}
+
+  \vspace{-1em}
+
+  \begin{columns}[T,onlytextwidth]
+
+    % ----------- Schéma -----------
+    \column{0.48\textwidth}
+\begin{pccard}
+  \centering
+  \figschemaphotovoltaique
+
+  {\scriptsize\bfseries\color{pcNavy}
+   Représentation de la partie photovoltaïque}
+\end{pccard}
+
+
+\begin{pcbanner}{Photogénération}
+      \centering\scriptsize
+      \textbf{Photogénération (Bouguer--Lambert--Beer)}
+      \[ G(x) = q_0\,k_a\,e^{-k_a x} \]
+      \end{pcbanner}
+
+    % ----------- Approches -----------
+    
+    \column{0.48\textwidth}
+\vspace{-0.5em}
+    \begin{pcbanner}{Système de Van Roosbroeck}
+      \vspace{0.3em}
+      \centering\scriptsize
+
+      \textbf{Équation de Poisson}
+      \[ -\nabla\!\cdot\!\left(\varepsilon\,\nabla\psi\right) = q\,(C + p - n) \]
+
+      \textbf{Équations de continuité}
+      \[ \frac{\partial n}{\partial t} = \frac{1}{q}\,\nabla\!\cdot\!\vec{J}_n - R + G_{th} + G_{ph} \]
+      \[ \frac{\partial p}{\partial t} = -\frac{1}{q}\,\nabla\!\cdot\!\vec{J}_p - R + G_{th} + G_{ph} \]
+
+      \textbf{Densités de courant (dérive-diffusion)}
+      \[ \vec{J}_n = q\,\mu_n\!\left(-n\,\nabla\psi + U_t\,\nabla n\right) \]
+      \[ \vec{J}_p = q\,\mu_p\!\left(-p\,\nabla\psi - U_t\,\nabla p\right) \]
+
+      \vspace{0.2em}
+      \textbf{Conditions aux limites : Dirichlet ou Robin}\\[0.2em]
+      \textbf{Recombinaisons : SRH, Auger, radiative}
+    \end{pcbanner}
+
+  \end{columns}
+
+
+\end{frame}
+% -------------------------------------- Modèles : Partie électrochimique -----------------------------------------
+
 \begin{frame}[t]{Modèles : partie électrochimique}
   \vspace{-1em}
 
   \begin{columns}[T,onlytextwidth]
 
-
-        % ----------- Schéma -----------
+    % ----------- Schéma -----------
     \column{0.48\textwidth}
-\begin{pccard}
-  \centering
-  \figschemaelectrochimique
+      \begin{pccard}
+        \centering
+        \figschemaelectrochimique
+        \vspace{0.5em}
+        {\scriptsize\bfseries\color{pcNavy}
+        Représentation de la partie électrochimique}
+      \end{pccard}
 
-  {\scriptsize\bfseries\color{pcNavy}
- Représentation de la partie électrochimique}
+    % ----------- Différents angles d'approche -----------
+    \column{0.48\textwidth}
+      \vspace{-0.5em}
+      \begin{pcbanner}{Différents angles d'approche}
 
-\end{pccard}
+        \vspace{0.45em}
 
- \column{0.48\textwidth}
-\vspace{-0.5em}
-\begin{pcbanner}{Différents angles d'approche}
-  \vspace{0.45em}
-  \begin{pcbannerlight}{Apport du CO2}
-    \vspace{0.3em}
-    \begin{itemize}\footnotesize
-          \item Bullage dans l'électrolyte 
-          \item Electrode à diffusion de gaz (GDE)
-    \end{itemize}
-  \end{pcbannerlight}
+        \begin{pcbannerlight}{Apport du CO2}
+          \vspace{0.3em}
+          \begin{itemize}\footnotesize
+                \item Bullage dans l'électrolyte 
+                \item Electrode à diffusion de gaz (GDE)
+          \end{itemize}
+        \end{pcbannerlight}
 
-  \vspace{0.45em}
+        \vspace{0.45em}
 
-  \begin{pcbannerlight}{Géométrie de l'électrode}
-    \vspace{0.3em}
-    \begin{itemize}\footnotesize
-      \item Modèle 3D local 
-      \item Modèle 1D macroscopique
-    \end{itemize}
-  \end{pcbannerlight}
+        \begin{pcbannerlight}{Géométrie de l'électrode}
+          \vspace{0.3em}
+          \begin{itemize}\footnotesize
+            \item Modèle 3D local 
+            \item Modèle 1D macroscopique
+          \end{itemize}
+        \end{pcbannerlight}
 
-\end{pcbanner}
-\end{columns}
-
-
-  \vspace{-0.5em}
-  \begin{columns}[T,onlytextwidth]
-    \column{\textwidth}
-      \begin{pcbanner}{Démarche}
-        \begin{itemize}\footnotesize
-          \item Comparer 1D et 3D (homogénéisation)
-          \item Comparer les deux configurations (électrode à diffusion de gaz / bullage dans l'électrolyte)
-          \item Confronter à l'expérimental (partenaires GASPER)
-        \end{itemize}
       \end{pcbanner}
-  \end{columns}
+    \end{columns}
+
+
+    \vspace{-0.75em}
+    \begin{columns}[T,onlytextwidth]
+      \column{\textwidth}
+        \begin{pcbanner}{Démarche}
+          \begin{itemize}\footnotesize
+            \item Comparer 1D et 3D (homogénéisation)
+            \item Comparer les deux configurations (électrode à diffusion de gaz / bullage dans l'électrolyte)
+            \item Confronter à l'expérimental (partenaires GASPER)
+          \end{itemize}
+        \end{pcbanner}
+    \end{columns}
 
 \end{frame}
 
-% ====================== BILAN PREMIÈRE ANNÉE ======================
-% ---------- BILAN : BRIQUE SEMI-CONDUCTEUR ----------
+
+%--------------------------------------------------------------------
+\begin{frame}[t]{Modèles : partie électrochimique}
+  \vspace{-1em}
+
+  \begin{columns}[T,onlytextwidth]
+
+    % ----------- Schéma (inchangé) -----------
+    \column{0.48\textwidth}
+      \begin{pccard}
+        \centering
+        \figschemaelectrochimique
+        \vspace{0.5em}
+        {\scriptsize\bfseries\color{pcNavy}
+        Représentation de la partie électrochimique}
+      \end{pccard}
+
+      \begin{pcbanner}{Réduction du \ch{CO2}}
+      \centering\scriptsize
+      \textbf{Equation de réaction}
+      \[ \mathrm{CO_2} + 2\,\mathrm{H^+} + 2\,\mathrm{e^-} \rightarrow \mathrm{CO} + \mathrm{H_2O} \]
+      \end{pcbanner}
+
+    % ----------- Modèle électrochimique -----------
+    \column{0.48\textwidth}
+      \vspace{-0.5em}
+      \begin{pcbanner}{Modèle électrochimique}
+        \vspace{0.3em}
+        \centering\scriptsize
+        \textbf{Transport des espèces (Nernst--Planck)}
+        \[ N_i = -D_i\nabla C_i - \frac{z_i F}{RT}\,D_i C_i\,\nabla\varphi_l + C_i\,\vec{v} \]
+        \[ \frac{\partial C_i}{\partial t} + \nabla\!\cdot\! N_i = 0 \]
+
+        \textbf{Électroneutralité} \qquad \textbf{Transport électronique (Ohm)}
+        \[ \sum_i z_i C_i = 0 \qquad \nabla\!\cdot\!\left(-\sigma_s\,\nabla\varphi_s\right) = 0 \]
+
+        \textbf{Cinétique interfaciale (Marcus--Gerischer)}
+        \[ j = j_0\!\left[\exp\!\Big(\!-\frac{\alpha_c F\eta}{RT}\Big) - \exp\!\Big(\frac{\alpha_a F\eta}{RT}\Big)\right] \]
+      \end{pcbanner}
+
+    \end{columns}
+
+\end{frame}
+
+%==================================================================================================================
+%=============================================== Fin  Modèles =====================================================
+%==================================================================================================================
+
+%------------------------------------------------------------------------------------------------------------------
+
+%==================================================================================================================
+%==================================================== Bilan =======================================================
+%==================================================================================================================
 \section{Bilan sur la première année}
+
+% --------------------------------------- Bilan : Brique photovoltaïque -------------------------------------------
+
 \begin{frame}[t]{Bilan : brique photovoltaïque}
   \vspace{0.3em}
   \begin{center}
@@ -379,6 +490,7 @@
           \item Absorption, génération, collecte des porteurs
           \item Recombinaisons SRH, Auger, radiatif
           \item Tentatives d'ajout de l'hétérojonction CIGS/CdS/ZnO
+          \item Tentative d'ajout de CL de Robin
         \end{itemize}
       \end{pcbanner}
     \column{0.48\textwidth}
@@ -387,6 +499,7 @@
           \item 1\textsuperscript{re} version : Newton stationnaire, adimensionnée
           \item Blocage à la photogénération
           \item Levé par passage en résolution transitoire
+          \item Comparaison réussi
         \end{itemize}
       \end{pcbanner}
   \end{columns}
@@ -403,7 +516,45 @@
   \end{columns}
 \end{frame}
 
-% ---------- BILAN : BRIQUE ÉLECTROCHIMIQUE ----------
+ \begin{frame}[t]{Brique photovoltaïque : validation}
+   \vspace{-0.5em}
+   \centering
+   \begin{pccard}
+     \centering
+     \begin{tikzpicture}
+      \begin{axis}[
+        width=0.9\linewidth, height=0.72\textheight,
+        xlabel={$x$ ($\mu$m)},
+        ylabel={Densités de porteurs ($\mathrm{m^{-3}}$)},
+        ymode=log,
+        legend pos=outer north east,
+        legend style={font=\scriptsize, cells={anchor=west}},
+        grid=both, grid style={gray!20},
+        tick label style={font=\scriptsize},
+        label style={font=\scriptsize},
+      ]
+        % --- Électrons n ---
+         \addplot[pcNavy, thick] table[x=x, y=n_code, col sep=semicolon] {donnees1.csv};
+         \addlegendentry{$n$ (code)}
+         \addplot[pcNavy, only marks, mark=o, mark size=1.1pt, each nth point=4]
+                 table[x=x, y=n_scaps, col sep=semicolon] {donnees1.csv};
+         \addlegendentry{$n$ (SCAPS)}
+        % % --- Trous p ---
+        \addplot[red!70!black, thick] table[x=x, y=p_code, col sep=semicolon] {donnees1.csv};
+        \addlegendentry{$p$ (code)}
+        \addplot[red!70!black, only marks, mark=square, mark size=1.1pt, each nth point=4]
+                 table[x=x, y=p_scaps, col sep=semicolon] {donnees1.csv};
+        \addlegendentry{$p$ (SCAPS)}
+        \end{axis}
+     \end{tikzpicture}
+
+     {\scriptsize\bfseries\color{pcNavy}
+      Densités de porteurs : comparaison code / SCAPS-1D}
+   \end{pccard}
+ \end{frame}
+
+% --------------------------------------- Bilan : Brique électrochimique -------------------------------------------
+
 \begin{frame}[t]{Bilan : brique électrochimique}
   \vspace{0.3em}
   \begin{center}
@@ -434,14 +585,23 @@
     \column{\textwidth}
       \begin{pcbanner}{Validation}
         \begin{itemize}\footnotesize
-          \item Cas test \ch{CO2 -> CO}
+          \item Rien pour le moment car pas implémenté
         \end{itemize}
       \end{pcbanner}
   \end{columns}
 \end{frame}
 
-% ====================== PERSPECTIVES ======================
-% ---------- PERSPECTIVES 1 : COMPLÉTER ET CONSTRUIRE ----------
+%==================================================================================================================
+%================================================ Fin Bilan =======================================================
+%==================================================================================================================
+
+%------------------------------------------------------------------------------------------------------------------
+
+%==================================================================================================================
+%================================================ Perspectives ====================================================
+%==================================================================================================================
+
+% --------------------------------- Perspectives : Complémenter et construire -------------------------------------
 \section{Perspectives}
 \begin{frame}[t]{Perspectives : compléter et construire}
   \vspace{0.4em}
@@ -477,7 +637,7 @@
   \end{columns}
 \end{frame}
 
-% ---------- PERSPECTIVES 2 : COUPLER ET OPTIMISER ----------
+% ---------------------------------- Perspectives : Coupler et optimiser -------------------------------------
 \begin{frame}[t]{Perspectives : coupler et optimiser}
   \vspace{0.4em}
 
@@ -499,7 +659,17 @@
   \end{pcbanner}
 \end{frame}
 
-% ====================== RÉFÉRENCES =================================
+
+%==================================================================================================================
+%================================================ Fin Perspectives ================================================
+%==================================================================================================================
+
+%------------------------------------------------------------------------------------------------------------------
+
+%==================================================================================================================
+%================================================ Références ====================================================
+%==================================================================================================================
+
 % \section{Références}
 
 % \begin{frame}{Références}
@@ -520,7 +690,16 @@
 %   \end{pccard}
 % \end{frame}
 
-% ====================== FIN =======================================
+%==================================================================================================================
+%================================================ Fin Références ===================================================
+%==================================================================================================================
+
+%------------------------------------------------------------------------------------------------------------------
+
+%==================================================================================================================
+%========================================================= Fin ====================================================
+%==================================================================================================================
+
 {\setbeamertemplate{footline}{}
 \begin{frame}[plain]
   \centering
