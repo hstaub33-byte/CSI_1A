@@ -300,7 +300,6 @@
       \item Photogénération (électromagnétisme)
       \item Recombinaisons : SRH, Auger, radiative
       \item Hétérojonction CIGS/CdS/ZnO
-      \item Conditions aux limites : Dirichlet ou Robin
     \end{itemize}
   \end{pcbannerlight}
 \end{pcbanner}
@@ -354,9 +353,8 @@
       \[ \vec{J}_n = q\,\mu_n\!\left(-n\,\nabla\psi + U_t\,\nabla n\right) \]
       \[ \vec{J}_p = q\,\mu_p\!\left(-p\,\nabla\psi - U_t\,\nabla p\right) \]
 
+      \textbf{CL Robin ou Diriclet}
       \vspace{0.2em}
-      \textbf{Conditions aux limites : Dirichlet ou Robin}\\[0.2em]
-      \textbf{Recombinaisons : SRH, Auger, radiative}
     \end{pcbanner}
 
   \end{columns}
@@ -431,10 +429,15 @@
   \begin{columns}[T,onlytextwidth]
 
     % ----------- Schéma (inchangé) -----------
-    \column{0.48\textwidth}
+     \column{0.48\textwidth}
       \begin{pccard}
         \centering
         \figschemaelectrochimique
+        \begin{tikzpicture}[remember picture, overlay]
+          \draw[pcSun, line width=1.5pt]
+            ([xshift=-4.35cm, yshift=0.91cm]current page.center)
+            ellipse [x radius=0.6cm, y radius=1.1cm];
+        \end{tikzpicture}
         \vspace{0.5em}
         {\scriptsize\bfseries\color{pcNavy}
         Représentation de la partie électrochimique}
@@ -458,7 +461,7 @@
         \[ N_i = -D_i\nabla C_i - \frac{z_i F}{RT}\,D_i C_i\,\nabla\varphi_l + C_i\,\vec{v} \]
 
         \textbf{Électroneutralité} \qquad \textbf{Transport électronique (Ohm)}
-        \[ \sum_i z_i C_i = 0 \qquad \nabla\!\cdot\!\left(-\sigma_s\,\nabla\varphi_s\right) = 0 \]
+        \[ \sum_i z_i C_i = 0 \qquad \qquad \qquad \nabla\!\cdot\!\left(-\sigma_s\,\nabla\varphi_s\right) = 0 \]
 
         \textbf{Cinétique interfaciale (Marcus--Gerischer)}
         \[ j = j_{\max} \cdot \frac{1}{2}\left[1 - \operatorname{Erf}\left(\frac{-eF\eta + \lambda}{2\sqrt{\lambda k_B T}}\right)\right] \]
@@ -468,46 +471,6 @@
 
 \end{frame}
 
-
-
-% -------------------------------------- Modèles : Bilan détaillé -------------------------------------------------
-\begin{frame}[t]{Modèles : approche par bilan détaillé}
-
-  \vspace{-1em}
-
-  \begin{pcbanner}{Une brique transverse}
-    \centering
-    \footnotesize
-    Contrairement aux deux briques précédentes, le bilan détaillé ne traite pas
-    séparément le photovoltaïque et l'électrochimie : il considère le dispositif
-    dans son ensemble par des bilans globaux d'énergie et de flux.
-  \end{pcbanner}
-
-  \vspace{0.4em}
-
-  \begin{columns}[T,onlytextwidth]
-
-    \column{0.48\textwidth}
-      \begin{pcbanner}{Principe}
-        \begin{itemize}\footnotesize
-          \item Approche globale, macroscopique
-          \item Bilans d'énergie et de flux sur le dispositif complet
-          \item Limite thermodynamique de conversion (Shockley--Queisser)
-        \end{itemize}
-      \end{pcbanner}
-
-    \column{0.48\textwidth}
-      \begin{pcbanner}{Intérêt}
-        \begin{itemize}\footnotesize
-          \item Vision d'ensemble, peu de paramètres
-          \item Borne supérieure de performance atteignable
-          \item Complémentaire des modèles locaux détaillés
-        \end{itemize}
-      \end{pcbanner}
-
-  \end{columns}
-
-\end{frame}
 %==================================================================================================================
 %=============================================== Fin  Modèles =====================================================
 %==================================================================================================================
@@ -523,14 +486,9 @@
 
 \begin{frame}[t]{Bilan : brique photovoltaïque}
   \vspace{0.3em}
-  \begin{center}
-    {\footnotesize\color{pcNavy!70}Solveur drift-diffusion 1D développé en C, basé sur Van Roosbroeck}
-  \end{center}
-  \vspace{0.15em}
-
   \begin{columns}[T,onlytextwidth]
     \column{0.48\textwidth}
-      \begin{pcbanner}{Ce que j'ai construit}
+      \begin{pcbanner}{Avancées}
         \begin{itemize}\footnotesize
           \item Solveur 1D : Poisson + deux continuités
           \item Absorption, génération, collecte des porteurs
@@ -603,16 +561,11 @@
 
 \begin{frame}[t]{Bilan : brique électrochimique}
   \vspace{0.3em}
-  \begin{center}
-    {\footnotesize\color{pcNavy!70}Modèle homogénéisé, de l'échelle du pore au 1D macroscopique}
-  \end{center}
-  \vspace{0.15em}
-
   \begin{columns}[T,onlytextwidth]
     \column{0.48\textwidth}
-      \begin{pcbanner}{Ce que j'ai construit}
+      \begin{pcbanner}{Avancées}
         \begin{itemize}\footnotesize
-          \item Modèle 3D local : Nernst--Planck, loi d'Ohm, Butler--Volmer
+          \item Modèle 3D local : Nernst--Planck, loi d'Ohm, Marcus--Gerischer
           \item Réduction 1D par homogénéisation (coefficients effectifs)
         \end{itemize}
       \end{pcbanner}
@@ -658,15 +611,19 @@
         \begin{itemize}\footnotesize
           \item Ajouter les hétérojonctions
           \item Revoir les conditions aux limites
+          \item Compléter la partie optique 
           \item Valider sur les données de l'ANR
+          \item Intégrer des phénomènes fins si nécessaire
         \end{itemize}
       \end{pcbanner}
     \column{0.48\textwidth}
       \begin{pcbanner}{Compléter l'électrochimique}
         \begin{itemize}\footnotesize
-          \item Partie hors du milieu poreux + modèle GDE
+          \item Partie hors du milieu poreux 
+          \item Modèle GDE
           \item Vérifier la loi de vitesse (données ANR)
-          \item Intégrer des phénomènes fins (HER, pH, double couche\dots)
+          \item Valider sur les données de l'ANR
+          \item Intégrer des phénomènes fins si nécessaire (HER, pH, double couche\dots)
         \end{itemize}
       \end{pcbanner}
   \end{columns}
