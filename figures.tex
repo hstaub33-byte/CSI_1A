@@ -167,11 +167,11 @@
 \def\W{3.0}\def\yc{2.4}\def\yv{0.6}\def\bh{0.55}
 \def\recbandes{%
   \fill[pcSkyLight] (0,\yc) rectangle (\W,\yc+\bh);
-  \fill[pcCO!15]    (0,\yv-\bh) rectangle (\W,\yv);
+  \fill[pcSun!15]    (0,\yv-\bh) rectangle (\W,\yv);
   \draw[band] (0,\yc) rectangle (\W,\yc+\bh);
   \draw[band] (0,\yv-\bh) rectangle (\W,\yv);
   \node[font=\scriptsize\bfseries, pcNavy]        at (\W/2,\yc+\bh/2) {BC};
-  \node[font=\scriptsize\bfseries, pcCO!75!black] at (\W/2,\yv-\bh/2) {BV};
+  \node[font=\scriptsize\bfseries, pcSun!75!black] at (\W/2,\yv-\bh/2) {BV};
 }
 % 1. RADIATIVE
 \begin{scope}[xshift=0cm]
