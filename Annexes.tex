@@ -3,7 +3,7 @@
 %==================================================================================================================
 
 \begin{frame}[t]{Différentes types de recombinaisons}
-  \vspace{-0.5em}
+  \vspace{-2.5em}
   \centering
       \begin{pccard}
         \centering
@@ -16,13 +16,13 @@
 
 %------------------------------------------------------------------------------------------------------------------
 
-\begin{frame}[t]{Annexe : conditions aux limites — semi-conducteur}
+\begin{frame}[t]{Conditions aux limites — semi-conducteur}
   \vspace{-0.5em}
 
   \begin{columns}[T,onlytextwidth]
 
     \column{0.48\textwidth}
-      \begin{pcbanner}{Contacts ohmiques (retenu)}
+      \begin{pcbanner}{Contacts ohmiques (actuel)}
         \centering\scriptsize
         \textbf{Poisson : Dirichlet sur le potentiel}
         \[ \psi = \psi_0 + U_{\mathrm{app}} \]
@@ -34,10 +34,10 @@
       \end{pcbanner}
 
     \column{0.48\textwidth}
-      \begin{pcbanner}{Recombinaison de surface finie (perspective)}
+      \begin{pcbanner}{Autre possibilité CL}
         \begin{itemize}\footnotesize
           \item Hypothèse actuelle : contacts ohmiques idéaux (forte)
-          \item Alternative : conditions de \textbf{Robin}
+          \item Alternative : conditions de Robin
           \item Permet une recombinaison de surface finie aux contacts
           \item Objet de comparaison à venir
         \end{itemize}
@@ -49,28 +49,20 @@
 %----------------------------------------------------------------------------------------
 
 \begin{frame}[t]{Modèle 1D homogénéisé}
-  \vspace{-0.5em}
+  \vspace{-2.5em}
 
   \begin{columns}[T,onlytextwidth]
 
-    \column{0.46\textwidth}
-      \begin{pccard}
-        \centering
-        \figschemaelectrochimique
-        \vspace{0.4em}
-        {\scriptsize\bfseries\color{pcNavy}
-        Prise de moyenne volumique : 3D pore $\rightarrow$ 1D électrode}
-      \end{pccard}
-
+    \column{\textwidth}
       \begin{pcbanner}{Principe}
         \begin{itemize}\footnotesize
           \item Moyenne sur un volume élémentaire représentatif
           \item Microstructure incorporée dans des coefficients effectifs
-          \item Fermeture par vecteurs $b$, $d$, $e$
+          \item Fermeture par vecteurs
+          \item Hypothèses fortes pour ces vecteurs
         \end{itemize}
       \end{pcbanner}
 
-    \column{0.52\textwidth}
       \vspace{-0.5em}
       \begin{pcbanner}{Système homogénéisé}
         \centering\scriptsize
@@ -82,12 +74,17 @@
            - \varepsilon_l \langle C_i\rangle^l \langle v\rangle^l \Big]
            + a_v^{\mathrm{cat}} R_i \]
 
-        \textbf{Électroneutralité}
-        \[ \sum_i z_i \langle C_i\rangle^l = 0 \]
-
-        \textbf{Loi d'Ohm (phase solide)}
-        \[ \nabla\!\cdot\!\big(\varepsilon_s \sigma^{\mathrm{eff}}
-           \nabla\langle\varphi_s\rangle^s\big) = -\,a_v^{\mathrm{cat}}\, j \]
+                \begin{minipage}[t]{0.48\linewidth}
+          \centering
+          \textbf{Électroneutralité}
+          \[ \sum_i z_i \langle C_i\rangle^l = 0 \]
+        \end{minipage}\hfill
+        \begin{minipage}[t]{0.48\linewidth}
+          \centering
+          \textbf{Loi d'Ohm (phase solide)}
+          \[ \nabla\!\cdot\!\big(\varepsilon_s \sigma^{\mathrm{eff}}
+             \nabla\langle\varphi_s\rangle^s\big) = -\,a_v^{\mathrm{cat}}\, j \]
+        \end{minipage}
 
         \vspace{0.3em}
         \textbf{Coefficients effectifs}\\[0.2em]
@@ -101,7 +98,7 @@
 
 %----------------------------------------------------------------------------------------
 
-\begin{frame}[t]{Annexe : réduction au module de Thiele}
+\begin{frame}[t]{Réduction au module de Thiele}
   \vspace{-0.5em}
 
   \begin{columns}[T,onlytextwidth]
@@ -142,12 +139,33 @@
 
 %--------------------------------------------------------------------------------
 
-\begin{frame}[t]{Annexe : conditions aux limites — électrochimie}
-  \vspace{-0.5em}
+\begin{frame}[t]{Conditions aux limites : électrochimie}
+  \vspace{-2.5em}
+   % ---------- 3D local : pleine largeur ----------
+  \begin{pcbanner}{Modèle 3D local}
+    \centering\scriptsize
 
+    \textbf{Collecteur de courant}
+    \[ n\!\cdot\!N_i = 0, \quad
+       n\!\cdot\!\nabla\varphi_l = 0, \quad
+       \varphi_s = E \]
+
+    \textbf{Parois inertes}
+    \[ n\!\cdot\!N_i = 0, \quad
+       n\!\cdot\!\nabla\varphi_l = 0, \quad
+       n\!\cdot\!\nabla\varphi_s = 0 \]
+
+    \textbf{Interface pore / milieu homogène}
+    \[ C_i = C_i^{\mathrm{hom}}, \quad
+       \varphi_l = \varphi_l^{\mathrm{hom}}, \quad
+       n_s\,\sigma_s\nabla\varphi_s = 0 \]
+  \end{pcbanner}
+
+  \vspace{-1.5em}
+
+  % ---------- 1D homogénéisé + cas simplifié : deux colonnes ----------
   \begin{columns}[T,onlytextwidth]
-
-    \column{0.5\textwidth}
+    \column{0.48\textwidth}
       \begin{pcbanner}{Système homogénéisé 1D}
         \centering\scriptsize
         \textbf{Collecteur de courant}
@@ -155,7 +173,7 @@
            n\!\cdot\!\nabla\langle\varphi_l\rangle^l = 0, \quad
            \langle\varphi_s\rangle^s = E \]
 
-        \vspace{0.3em}
+        
         \textbf{Interface pore / milieu homogène}
         \[ \langle C_i\rangle^l = C_i^{\mathrm{hom}}, \quad
            \langle\varphi_l\rangle^l = \varphi_l^{\mathrm{hom}} \]
@@ -163,8 +181,7 @@
            \nabla\langle\varphi_s\rangle^s\big) = 0 \]
       \end{pcbanner}
 
-    \column{0.5\textwidth}
-      \vspace{-0.5em}
+    \column{0.48\textwidth}
       \begin{pcbanner}{Cas simplifié \ch{CO2 -> CO}}
         \centering\scriptsize
         \textbf{Concentration imposée au bulk ($\zeta = 0$)}
@@ -179,4 +196,37 @@
 
   \end{columns}
 
+\end{frame}
+
+
+
+%===================================================================================================================
+\begin{frame}[t]{Ordre de grandeur des couches}
+\begin{pcbanner}{Paramètres de simulation}
+  \centering\scriptsize
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{llll}
+    \textbf{Valeur} & \textbf{Unité} & \textbf{Variable} & \textbf{Description} \\
+    \hline
+    $300$        & K              & $T$          & Température      \\
+    $0.8$        & V              & $\Delta U$   & Tension          \\
+    $2.23\times10^{21}$ & photons/m²/s & $q_0$   & Flux à 500\,nm   \\
+    $1.0\times10^{4}$   & m/s      & $S_n$        & Vitesse de recomb. surface ($n$) \\
+    $1.0\times10^{4}$   & m/s      & $S_p$        & Vitesse de recomb. surface ($p$) \\
+    $1.0\times10^{-8}$  & m        & $h_{\min}$   & Maille minimale  \\
+    $1.1$        & --             & ratio        & Progression      \\
+    $3$          & --             & $N_{\mathrm{couches}}$ & Nombre de couches \\
+  \end{tabular}
+\end{pcbanner}
+\begin{pcbanner}{Épaisseurs des couches}
+  \centering\scriptsize
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabular}{cc}
+    \textbf{Couche} & \textbf{Épaisseur} ($x_{\mathrm{fin}} - x_{\mathrm{début}}$) \\
+    \hline
+    CIGS & $1{,}0\,\mu$m  \\
+    ZnO & $0{,}1\,\mu$m  \\
+    CdS & $0{,}08\,\mu$m \\
+  \end{tabular}
+\end{pcbanner}
 \end{frame}

@@ -807,6 +807,17 @@ INPUT .\fond_bg.png
 INPUT .\fond_bg.png
 INPUT .\fond_bg.png
 INPUT .\fond_bg.png
+INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\tex\latex\montserrat\ts1montserrat-lf.fd
+INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\tex\latex\montserrat\ts1montserrat-lf.fd
+INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\tex\latex\montserrat\ts1montserrat-lf.fd
+INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\fonts\tfm\public\montserrat\Montserrat-Regular-lf-ts1.tfm
+INPUT .\fond_bg.png
+INPUT .\fond_bg.png
+INPUT .\fond_bg.png
+INPUT .\fond_bg.png
+INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\fonts\vf\public\montserrat\Montserrat-Regular-lf-ts1.vf
+INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\fonts\tfm\public\montserrat\Montserrat-Regular-lf-ts1--base.tfm
+INPUT C:\Users\hstaub\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\montserrat\zmo_ro7vi7.enc
 OUTPUT main.nav
 OUTPUT main.toc
 OUTPUT main.snm
