@@ -17,23 +17,6 @@
 \input{figures.tex}
 
 
-\definecolor{pvITO}{RGB}{210,225,245}
-\definecolor{pvCIGS}{RGB}{185,210,240}
-\definecolor{pvZnO}{RGB}{160,195,235}
-\definecolor{pvCdS}{RGB}{135,180,230}
-\definecolor{pvMetal}{RGB}{105,145,205}
-
-\definecolor{pvTop}{RGB}{95,120,210}
-\definecolor{pvSide}{RGB}{35,65,145}
-\definecolor{pvSun}{RGB}{255,222,33}
-\definecolor{pvFlux}{RGB}{245,160,30}
-
-\definecolor{ecMetal}{RGB}{255,222,33}
-\definecolor{ecPore}{RGB}{255,236,120}
-\definecolor{ecElyte}{RGB}{180,165,225}
-\definecolor{ecMemb}{RGB}{255,222,33}
-\definecolor{ecCat}{RGB}{90,60,150}
-
 \newcommand{\pvblock}[6]{%
 % #1 x, #2 y, #3 w, #4 h, #5 label, #6 front color
   \fill[#6] (#1,#2) rectangle ++(#3,#4);
@@ -77,121 +60,9 @@
   \end{tikzpicture}%
 \end{frame}
 
-
-%==================================================================================================================
-%============================================= Contexte ===========================================================
-%==================================================================================================================
-
-\section{Contexte}
-
-\newsavebox{\cardbox}
-
-\begin{frame}[t]{Contexte}
-  \vspace{0.4em}
-  % ---------- Première ligne : 420 ppm + double enjeu ----------------
-  \savebox{\cardbox}{%
-    \begin{minipage}{0.32\textwidth}
-      \begin{pccard}
-        \centering
-        \vspace{0.3em}
-        \pckeyfig{420~ppm}{Concentration actuelle de \ch{CO2} dans l'atmosphère}
-        \vspace{0.3em}
-      \end{pccard}
-    \end{minipage}}
-  \begin{columns}[T,onlytextwidth]
-    \column{0.32\textwidth}
-      \usebox{\cardbox}
-    \column{0.66\textwidth}
-      \vspace*{-0.55cm}
-        \begin{pcbanner}{Un double enjeu : carbone et énergie}
-          \begin{itemize}\footnotesize
-            \item Demande énergétique mondiale croissante
-            \item Certains secteurs difficiles à électrifier
-                  (aviation $\rightarrow$ kérosène)
-            \item Énergie solaire intermittente et difficile à stocker
-            \item Valoriser le \ch{CO2} en molécules d'intérêt
-                  $\rightarrow$ stockage de l'énergie solaire sous forme chimique
-          \end{itemize}
-        \end{pcbanner}
-  \end{columns}
-
-  % ---------- Deuxième ligne : schéma (gauche, large) + GASPER -------
-  \vspace{0.5em}
-  \begin{columns}[T,onlytextwidth]
-    \column{0.56\textwidth}
-      \begin{pcbanner}{Du \ch{CO2} aux carburants}
-        \centering
-        \includegraphics[width=0.98\linewidth]{schema_contexte.png}
-      \end{pcbanner}
-    \column{0.42\textwidth}
-\begin{pcbanner}{Projet ANR GASPER}
-  \begin{itemize}\footnotesize
-    \item Réduire le \ch{CO2} en \ch{CO} à l'aide d'une photocathode
-    \item 6 laboratoires impliqués
-    \item Élaboration, caractérisation et tests des photoélectrodes
-    \item Photoélectrodes efficaces, sélectives et stables
-  \end{itemize}
-\end{pcbanner}
-  \end{columns}
-\end{frame}
-
-%==================================================================================================================
-%============================================= Fin Contexte =======================================================
-%==================================================================================================================
-
 %------------------------------------------------------------------------------------------------------------------
-
-%==================================================================================================================
-%===================================== Présentation de la photocathode ============================================
-%==================================================================================================================
-
-\section{Présentation de la photocathode}
-
-\begin{frame}[t]{Présentation de la photocathode}
-
-  \vspace{0.3em}
-
-  \begin{columns}[T,onlytextwidth]
-
-    % ------------------ Colonne gauche ------------------
-    \column{0.54\textwidth}
-
-      \begin{pcbanner}{Réactions mises en jeu}
-        \footnotesize
-        \vspace{0.4em}
-        \textbf{\color{pcNavy!70}Anode}\\[0.3em]
-        \centerline{\normalsize\ch{H2O -> 2 H+ + 2 e- + 1/2 O2}}\\[0.9em]
-        \textbf{\color{pcNavy}Cathode}\\[0.3em]
-        \centerline{\normalsize\ch{CO2 + 2 H+ + 2 e- -> CO + H2O}}
-      \end{pcbanner}
-
-      \vspace{0.4em}
-
-      \begin{pcbanner}{Principe}
-        \begin{itemize}\footnotesize
-          \item Deux parties : photovoltaïque + électrochimique
-          \item Soleil $\rightarrow$ charges électriques (partie PV)
-          \item Charges $\rightarrow$ réduction du \ch{CO2} (partie électrochimique)
-        \end{itemize}
-      \end{pcbanner}
-
-    % ------------------ Colonne droite ------------------
-    \column{0.55\textwidth}
-
-      \centering
-
-      \hspace*{-0.75cm}\includegraphics[
-        width=1.2\linewidth
-      ]{photocathode.png}
-
-  \end{columns}
-
-\end{frame}
-
-%==================================================================================================================
-%============================================= Fin Photocathode ===================================================
-%==================================================================================================================
-
+\input{1_Contexte.tex}
+\input{2_Presentation_photo.tex}
 %------------------------------------------------------------------------------------------------------------------
 
 %==================================================================================================================
@@ -210,7 +81,7 @@
   ma thèse porte sur la \textbf{modélisation de la photocathode}.
   \end{pcbanner}
 
-  \vspace{0.1em}
+  \vspace{-0.5em}
 
   \begin{pcbanner}{Démarche de modélisation}
     \centering
@@ -222,19 +93,20 @@
       \hspace{1em}+\hspace{1em}
       Partie électrochimique
       \hspace{1em}$\rightarrow$\hspace{1em}
-      modèle complet\\
-      (en parallèle : approche par bilan détaillé, transverse aux deux parties)
-    }
+      modèle complet
+    }\\
+    \textcolor{pcNavy}{(en parallèle : approche par bilan détaillé, transverse aux deux parties)}
 
   \end{pcbanner}
 
-  \vspace{0.1em}
+  \vspace{-0.5em}
 
 \begin{pcbanner}{Finalité}
   \centering
   \footnotesize
-  Utiliser le modèle pour guider la conception de photocathodes
-  plus performantes et limiter les essais expérimentaux.
+  Utiliser le modèle pour guider la montée en échelle (extrapolation), la conception de photocathodes
+  plus performantes et permettre ainsi de limiter les essais expérimentaux.
+  
 \end{pcbanner}
 
 \end{frame}
@@ -351,9 +223,9 @@
 
       \textbf{Densités de courant (dérive-diffusion)}
       \[ \vec{J}_n = q\,\mu_n\!\left(-n\,\nabla\psi + U_t\,\nabla n\right) \]
-      \[ \vec{J}_p = q\,\mu_p\!\left(-p\,\nabla\psi - U_t\,\nabla p\right) \]
-
-      \textbf{CL Robin ou Diriclet}
+      \[ \vec{J}_p = q\,\mu_p\!\left(-p\,\nabla\psi - U_t\,\nabla p\right) \]\\
+\vspace{1em}
+      \textbf{CL Robin ou Dirichlet}
       \vspace{0.2em}
     \end{pcbanner}
 
@@ -445,7 +317,7 @@
 
       \begin{pcbanner}{Réduction du \ch{CO2}}
       \centering\scriptsize
-      \textbf{Equation de réaction}
+      \textbf{Équation de réaction}
       \[ \mathrm{CO_2} + 2\,\mathrm{H^+} + 2\,\mathrm{e^-} \rightarrow \mathrm{CO} + \mathrm{H_2O} \]
       \end{pcbanner}
 
@@ -455,7 +327,7 @@
         \begin{pcbanner}{Modèle dans le milieu poreux}
         \vspace{0.3em}
         \centering\scriptsize
-        \textbf{Equation de conservation}
+        \textbf{Équation de conservation}
         \[ \frac{\partial C_i}{\partial t} + \nabla\!\cdot\! N_i = 0 \]
         \textbf{Transport des espèces (Nernst--Planck)}
         \[ N_i = -D_i\nabla C_i - \frac{z_i F}{RT}\,D_i C_i\,\nabla\varphi_l + C_i\,\vec{v} \]
@@ -463,7 +335,7 @@
         \textbf{Électroneutralité} \qquad \textbf{Transport électronique (Ohm)}
         \[ \sum_i z_i C_i = 0 \qquad \qquad \qquad \nabla\!\cdot\!\left(-\sigma_s\,\nabla\varphi_s\right) = 0 \]
 
-        \textbf{Cinétique interfaciale (Marcus--Gerischer)}
+        \textbf{Cinétique interfaciale (Marcus--Gerischer (théorique)/BV (semi-empirique))}
         \[ j = j_{\max} \cdot \frac{1}{2}\left[1 - \operatorname{Erf}\left(\frac{-eF\eta + \lambda}{2\sqrt{\lambda k_B T}}\right)\right] \]
       \end{pcbanner}
 
@@ -471,6 +343,63 @@
 
 \end{frame}
 
+%--------------------------------------------------------------------
+\begin{frame}[t]{Electrochimie: cas simplifié \ch{CO2} -> \ch{CO}}
+  \vspace{-1em}
+
+  \begin{columns}[T,onlytextwidth]
+
+    % ----------- Colonne gauche : hypothèses -----------
+      \column{0.48\textwidth}
+
+
+   \begin{pcbanner}{Module de Thiele $\phi$}
+        \scriptsize
+        Compétition diffusion / réaction :
+        \begin{itemize}\footnotesize
+        \item $\phi \ll 1$ : diffusion rapide $\rightarrow$ concentration uniforme
+        \item $\phi \gg 1$ : réaction rapide $\rightarrow$ \ch{CO2} consommé près de l'interface
+        \end{itemize}
+      \end{pcbanner}
+
+      \begin{pcbanner}{Hypothèses (approche de Thiele)}
+        \begin{itemize}\footnotesize
+          \item Régime stationnaire, transport purement diffusif
+          \item Migration, convection, chute ohmique négligées
+          \item Deux espèces carbonées seulement : \ch{CO2}, \ch{CO}
+          \item Réaction globale simplifiée \ch{CO2 -> CO}
+        \end{itemize}
+      \end{pcbanner}
+
+    % ----------- Colonne droite : modèle + solution -----------
+    \column{0.48\textwidth}
+      \vspace{-0.5em}
+      \begin{pcbanner}{Système diffusion--réaction}
+        \centering\scriptsize
+        \textbf{Forme adimensionnée (module de Thiele $\phi$)}
+        \[ \varepsilon_l D^{\mathrm{eff}}_{\ch{CO2}}
+           \frac{\mathrm{d}^2 \langle C_{\ch{CO2}}\rangle^l}{\mathrm{d}z^2}
+           = a_v^{\mathrm{cat}}\, k\, \langle C_{\ch{CO2}}\rangle^l \]
+        \[ \varepsilon_l D^{\mathrm{eff}}_{\ch{CO}}
+           \frac{\mathrm{d}^2 \langle C_{\ch{CO}}\rangle^l}{\mathrm{d}z^2}
+           = -\,a_v^{\mathrm{cat}}\, k\, \langle C_{\ch{CO2}}\rangle^l \]
+      \end{pcbanner}
+
+      \begin{pcbanner}{Solution analytique}
+        \centering\scriptsize
+        \[ \langle C_{\ch{CO2}}\rangle_l(\zeta)
+           = C^{\mathrm{hom}}_{\ch{CO2}}\,
+             \frac{\cosh[\phi(\zeta+1)]}{\cosh(\phi)} \]
+        \[ \langle C_{\ch{CO}}\rangle_l(\zeta)
+           = C^{\mathrm{hom}}_{\ch{CO}}
+           + \frac{D^{\mathrm{eff}}_{\ch{CO2}}}{D^{\mathrm{eff}}_{\ch{CO}}}
+             \,C^{\mathrm{hom}}_{\ch{CO2}}
+             \left[1 - \frac{\cosh[\phi(\zeta+1)]}{\cosh(\phi)}\right] \]
+      \end{pcbanner}
+
+    \end{columns}
+
+\end{frame}
 %==================================================================================================================
 %=============================================== Fin  Modèles =====================================================
 %==================================================================================================================
@@ -490,20 +419,21 @@
     \column{0.48\textwidth}
       \begin{pcbanner}{Avancées}
         \begin{itemize}\footnotesize
-          \item Solveur 1D : Poisson + deux continuités
-          \item Absorption, génération, collecte des porteurs
+          \item Solveur 1D en C : Poisson + deux continuités
+          \item Génération Bouger
           \item Recombinaisons SRH, Auger, radiatif
-          \item Tentatives d'ajout de l'hétérojonction CIGS/CdS/ZnO
-          \item Tentative d'ajout de CL de Robin
+          \item Recherche sur l'hétérojonction CIGS/CdS/ZnO
+          \item Recherche sur des CL plus réalistes
         \end{itemize}
       \end{pcbanner}
     \column{0.48\textwidth}
       \begin{pcbanner}{Jalons clés}
         \begin{itemize}\footnotesize
           \item 1\textsuperscript{re} version : Newton stationnaire, adimensionnée
+          \item Comparaison sans génération réussi avec Farrell et al.
           \item Blocage à la photogénération
           \item Levé par passage en résolution transitoire
-          \item Comparaison réussi
+          \item Comparaison réussi pour l'homojonction et CL ohmique avec et sans génération
         \end{itemize}
       \end{pcbanner}
   \end{columns}
@@ -514,7 +444,7 @@
       \begin{pcbanner}{Validation}
         \begin{itemize}\footnotesize
           \item Cas sans génération : accord avec Farrell et al.
-          \item Comparaison avec SCAPS 1D
+          \item Cas avec génération : accord avec SCAPS 1D (ohmique et homojonctions)
         \end{itemize}
       \end{pcbanner}
   \end{columns}
@@ -567,13 +497,14 @@
         \begin{itemize}\footnotesize
           \item Modèle 3D local : Nernst--Planck, loi d'Ohm, Marcus--Gerischer
           \item Réduction 1D par homogénéisation (coefficients effectifs)
+          \item Modèle de Thiele en cas limite (facteur d'efficacité)
+          \item Réaction globale simplifiée \ch{CO2 -> CO} pour le moment
         \end{itemize}
       \end{pcbanner}
     \column{0.48\textwidth}
       \begin{pcbanner}{Jalons clés}
         \begin{itemize}\footnotesize
           \item Étude bibliographique (lois de vitesse)
-          \item Modèle de Thiele en cas limite (facteur d'efficacité)
           \item Revue des phénomènes influençant l'électrode
         \end{itemize}
       \end{pcbanner}
@@ -631,7 +562,7 @@
   \vspace{0.35em}
   \begin{columns}[T,onlytextwidth]
     \column{\textwidth}
-      \begin{pcbanner}{Construire de nouvelles briques}
+      \begin{pcbanner}{Construire/Comprendre de nouvelles briques}
         \begin{itemize}\footnotesize
           \item Génération optique : modélisation électromagnétique
           \item \textit{Detailed balance} : approche alternative (semi-conducteur)
@@ -653,7 +584,7 @@
 
   \vspace{0.8em}
 
-  \begin{pcbanner}{Objectif final : un outil d'optimisation}
+  \begin{pcbanner}{Objectif final : Outil d'analyse d'extrapolation et d'optimisation}
     \begin{itemize}\footnotesize
       \item Modèle couplé et prédictif $\rightarrow$ explorer l'espace des géométries
       \item Épaisseurs, structure poreuse, aire catalytique
@@ -696,7 +627,33 @@
 %==================================================================================================================
 %================================================ Fin Références ===================================================
 %==================================================================================================================
+\section{Formations}
 
+\begin{frame}[t]{Formations suivies}
+
+  \vspace{-0.5em}
+
+  \begin{columns}[T,onlytextwidth]
+
+    \column{0.48\textwidth}
+      \begin{pcbanner}{Formations scientifiques}
+        \begin{itemize}\footnotesize
+          \item Ecole de physique des Houches
+          \item Séminaire Monte Carlo Roffiac
+        \end{itemize}
+      \end{pcbanner}
+
+    \column{0.48\textwidth}
+      \begin{pcbanner}{Formations transversales}
+        \begin{itemize}\footnotesize
+          \item Festival les nuées ardentes
+          \item Journée Scientifique SPI
+        \end{itemize}
+      \end{pcbanner}
+
+  \end{columns}
+
+\end{frame}
 %------------------------------------------------------------------------------------------------------------------
 % ====================================================================
 % ====================================================================
@@ -710,16 +667,18 @@
 %  Le trait pointillé orange = position actuelle (~ sept 2026, mois 11).
 %  NB : les nombres des \ganttbar sont des indices de mois, 1 = nov 2025.
 % ====================================================================
+
+\section{Gantt : calendrier prévisionnel}
 \begin{frame}[t]{Calendrier prévisionnel}
 
-  \vspace{-0.8em}
+  \vspace{-2em}
   \begin{pccard}
     % Cale le graphe à gauche (au lieu de le centrer) : la marge négative
     % remonte les intitulés vers le bord gauche. Ajuste -1.2cm si besoin.
-    \noindent\hspace*{-2cm}%
-    \begin{ganttchart}[
-        x unit=0.315cm,
-        hgrid, vgrid={*2{draw=gray!12}, *1{draw=gray!25}},
+    \noindent\hspace*{-0.55cm}%
+        \begin{ganttchart}[
+        x unit=0.7cm,
+        hgrid, vgrid={*3{draw=gray!12}, *1{draw=gray!25}},
         canvas/.style={draw=gray!40, line width=.5pt},
         y unit title=0.38cm, y unit chart=0.38cm,
         title height=1, title/.style={fill=none},
@@ -731,58 +690,56 @@
         group/.append style={draw=none, fill=pcNavy!70},
         group height=.5, group peaks tip position=0,
         bar/.append style={draw=none, fill=pcBlue!75}, bar height=.6,
-      ]{1}{36}
+      ]{1}{12}
 
-      % --- Bandeau 1 : année de thèse (nov -> oct) ---
-      \gantttitle{Année 1 (2025--26)}{12}
-      \gantttitle{Année 2 (2026--27)}{12}
-      \gantttitle{Année 3 (2027--28)}{12}                      \\
-      % --- Bandeau 2 : mois, écrits verticalement pour rester lisibles.
-      %     Départ novembre 2025 : N D J F M A M J J A S O ---
-      \ganttset{title label node/.append style={rotate=90},
-                title label font=\tiny\bfseries\color{pcNavy}}
-      \gantttitle{N}{1}\gantttitle{D}{1}\gantttitle{J}{1}\gantttitle{F}{1}\gantttitle{M}{1}\gantttitle{A}{1}\gantttitle{M}{1}\gantttitle{J}{1}\gantttitle{J}{1}\gantttitle{A}{1}\gantttitle{S}{1}\gantttitle{O}{1}%
-      \gantttitle{N}{1}\gantttitle{D}{1}\gantttitle{J}{1}\gantttitle{F}{1}\gantttitle{M}{1}\gantttitle{A}{1}\gantttitle{M}{1}\gantttitle{J}{1}\gantttitle{J}{1}\gantttitle{A}{1}\gantttitle{S}{1}\gantttitle{O}{1}%
-      \gantttitle{N}{1}\gantttitle{D}{1}\gantttitle{J}{1}\gantttitle{F}{1}\gantttitle{M}{1}\gantttitle{A}{1}\gantttitle{M}{1}\gantttitle{J}{1}\gantttitle{J}{1}\gantttitle{A}{1}\gantttitle{S}{1}\gantttitle{O}{1} \\
+      % --- Bandeau 1 : année de thèse ---
+      \gantttitle{Année 1 (2025--26)}{4}
+      \gantttitle{Année 2 (2026--27)}{4}
+      \gantttitle{Année 3 (2027--28)}{4}                       \\
+      % --- Bandeau 2 : trimestres ---
+      \gantttitle{T1}{1}\gantttitle{T2}{1}\gantttitle{T3}{1}\gantttitle{T4}{1}%
+      \gantttitle{T1}{1}\gantttitle{T2}{1}\gantttitle{T3}{1}\gantttitle{T4}{1}%
+      \gantttitle{T1}{1}\gantttitle{T2}{1}\gantttitle{T3}{1}\gantttitle{T4}{1} \\
 
       % ---------- Brique photovoltaïque ----------
-      \ganttgroup{Semi-conducteur}{1}{24}                      \\
-      \ganttbar{Solveur 1D (Van Roosbroeck)}{1}{9}             \\
-      \ganttbar{Validation (Farrell, SCAPS)}{7}{12}            \\
+      \ganttgroup{Semi-conducteur}{1}{8}                       \\
+      \ganttbar{Solveur 1D (Van Roosbroeck)}{1}{3}             \\
+      \ganttbar{Validation (Farrell, SCAPS)}{3}{4}             \\
       \ganttbar[bar/.append style={fill=pcSun!70}]%
-               {Hétérojonctions \& CL de Robin}{13}{21}        \\
+               {Hétérojonctions \& CL de Robin}{5}{7}          \\
       \ganttbar[bar/.append style={fill=pcSun!70}]%
-               {Validation données ANR}{19}{24}                \\
+               {Validation données ANR}{7}{8}                  \\
 
       % ---------- Brique électrochimique ----------
-      \ganttgroup{Électrochimie}{4}{27}                        \\
-      \ganttbar{Modèle 3D $\rightarrow$ 1D (homogénéisation)}{4}{12} \\
+      \ganttgroup{Électrochimie}{2}{9}                         \\
+      \ganttbar{Modèle 3D $\rightarrow$ 1D (homogénéisation)}{2}{4} \\
       \ganttbar[bar/.append style={fill=pcSun!70}]%
-               {Implémentation + modèle GDE}{13}{24}           \\
+               {Implémentation + modèle GDE}{5}{8}             \\
       \ganttbar[bar/.append style={fill=pcSun!70}]%
-               {Validation données ANR}{22}{27}                \\
+               {Validation données ANR}{8}{9}                  \\
 
       % ---------- Nouvelles briques ----------
-      \ganttgroup{Nouvelles briques}{16}{27}                   \\
+      \ganttgroup{Nouvelles briques}{6}{9}                     \\
       \ganttbar[bar/.append style={fill=pcSun!70}]%
-               {Génération optique (électromagnétisme)}{16}{27} \\
+               {Génération optique (électromagnétisme)}{6}{9}  \\
       \ganttbar[bar/.append style={fill=pcSun!70}]%
-               {\textit{Detailed balance}}{19}{27}             \\
+               {\textit{Detailed balance}}{7}{9}               \\
 
       % ---------- Couplage & optimisation ----------
-      \ganttgroup{Couplage \& optimisation}{25}{36}            \\
+      \ganttgroup{Couplage \& optimisation}{9}{12}             \\
       \ganttbar[bar/.append style={fill=pcSun!70}]%
-               {Couplage des briques}{25}{33}                  \\
+               {Couplage des briques}{9}{11}                   \\
       \ganttbar[bar/.append style={fill=pcSun!70}]%
-               {Outil d'optimisation}{28}{36}                  \\
+               {Outil d'optimisation}{10}{12}                  \\
 
       % ---------- Rédaction ----------
       \ganttbar[bar/.append style={fill=pcNavy!55}]%
-               {Rédaction \& soutenance}{31}{36}               \\
+               {Rédaction \& soutenance}{11}{12}               \\
 
-      % ---------- Ligne "aujourd'hui" (~ septembre 2026, mois 11) ----------
-      \ganttvrule[vrule/.style={pcSunDeep, line width=1pt, dashed}]%
-                 {}{11}
+      % ---------- Ligne "aujourd'hui" (~ sept. 2026, milieu du T4 année 1) ----------
+      \ganttvrule[vrule/.style={pcSunDeep, line width=1pt, dashed},
+                  vrule offset=0.5]%
+                 {}{4}
 
     \end{ganttchart}
 
@@ -827,6 +784,173 @@
         {\scriptsize\bfseries\color{pcNavy}
         Différents types de recombinaisons : SRH, radiative et Auger}
       \end{pccard}
+\end{frame}
+
+%------------------------------------------------------------------------------------------------------------------
+
+\begin{frame}[t]{Annexe : conditions aux limites — semi-conducteur}
+  \vspace{-0.5em}
+
+  \begin{columns}[T,onlytextwidth]
+
+    \column{0.48\textwidth}
+      \begin{pcbanner}{Contacts ohmiques (retenu)}
+        \centering\scriptsize
+        \textbf{Poisson : Dirichlet sur le potentiel}
+        \[ \psi = \psi_0 + U_{\mathrm{app}} \]
+        {\raggedright tension appliquée répartie symétriquement sur les deux contacts\par}
+        \vspace{0.4em}
+        \textbf{Densités : valeurs d'équilibre figées}
+        \[ n = n_{\mathrm{eq}}, \qquad p = p_{\mathrm{eq}} \]
+        {\raggedright nœuds de bord non mis à jour par le schéma temporel\par}
+      \end{pcbanner}
+
+    \column{0.48\textwidth}
+      \begin{pcbanner}{Recombinaison de surface finie (perspective)}
+        \begin{itemize}\footnotesize
+          \item Hypothèse actuelle : contacts ohmiques idéaux (forte)
+          \item Alternative : conditions de \textbf{Robin}
+          \item Permet une recombinaison de surface finie aux contacts
+          \item Objet de comparaison à venir
+        \end{itemize}
+      \end{pcbanner}
+
+  \end{columns}
+
+\end{frame}
+%----------------------------------------------------------------------------------------
+
+\begin{frame}[t]{Modèle 1D homogénéisé}
+  \vspace{-0.5em}
+
+  \begin{columns}[T,onlytextwidth]
+
+    \column{0.46\textwidth}
+      \begin{pccard}
+        \centering
+        \figschemaelectrochimique
+        \vspace{0.4em}
+        {\scriptsize\bfseries\color{pcNavy}
+        Prise de moyenne volumique : 3D pore $\rightarrow$ 1D électrode}
+      \end{pccard}
+
+      \begin{pcbanner}{Principe}
+        \begin{itemize}\footnotesize
+          \item Moyenne sur un volume élémentaire représentatif
+          \item Microstructure incorporée dans des coefficients effectifs
+          \item Fermeture par vecteurs $b$, $d$, $e$
+        \end{itemize}
+      \end{pcbanner}
+
+    \column{0.52\textwidth}
+      \vspace{-0.5em}
+      \begin{pcbanner}{Système homogénéisé}
+        \centering\scriptsize
+        \textbf{Conservation des espèces}
+        \[ \varepsilon_l\frac{\partial \langle C_i\rangle^l}{\partial t}
+           = \nabla\!\cdot\!\Big[ D_i^{\mathrm{tot}}\nabla\langle C_i\rangle^l
+           + \tfrac{z_i F}{RT}\varepsilon_l D_i^{\mathrm{eff,mig}}
+             \langle C_i\rangle^l \nabla\langle\varphi_l\rangle^l
+           - \varepsilon_l \langle C_i\rangle^l \langle v\rangle^l \Big]
+           + a_v^{\mathrm{cat}} R_i \]
+
+        \textbf{Électroneutralité}
+        \[ \sum_i z_i \langle C_i\rangle^l = 0 \]
+
+        \textbf{Loi d'Ohm (phase solide)}
+        \[ \nabla\!\cdot\!\big(\varepsilon_s \sigma^{\mathrm{eff}}
+           \nabla\langle\varphi_s\rangle^s\big) = -\,a_v^{\mathrm{cat}}\, j \]
+
+        \vspace{0.3em}
+        \textbf{Coefficients effectifs}\\[0.2em]
+        $D_i^{\mathrm{tot}} = \varepsilon_l D_i^{\mathrm{eff}} + D^{\mathrm{disp}}$,
+        \quad $\sigma^{\mathrm{eff}}$, \quad $a_v^{\mathrm{cat}} = \theta a_v$
+      \end{pcbanner}
+
+  \end{columns}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\begin{frame}[t]{Annexe : réduction au module de Thiele}
+  \vspace{-0.5em}
+
+  \begin{columns}[T,onlytextwidth]
+
+    \column{0.48\textwidth}
+      \begin{pcbanner}{Hypothèses successives}
+        \begin{itemize}\footnotesize
+          \item Régime stationnaire
+          \item Convection négligée ($\langle v\rangle^l = 0$)
+          \item Migration négligée
+          \item Potentiel solide uniforme ($\nabla\langle\varphi_s\rangle^s = 0$)
+          \item Cinétique du 1\textsuperscript{er} ordre (Butler--Volmer linéarisée)
+        \end{itemize}
+      \end{pcbanner}
+
+    \column{0.48\textwidth}
+      \vspace{-0.5em}
+      \begin{pcbanner}{Équation de diffusion--réaction}
+        \centering\scriptsize
+        \[ \frac{\mathrm{d}^2 \langle C_i\rangle^{l,*}}{\mathrm{d}\zeta^2}
+           = \phi^2\, \langle C_i\rangle^{l,*} \]
+
+        \textbf{Module de Thiele}
+        \[ \phi^2 = -\,\frac{\nu_i\, a_v^{\mathrm{cat}}\, k(\eta)\, l_e^2}
+                          {n_e F\, \varepsilon_l D_i^{\mathrm{eff}}} \]
+
+        \textbf{Facteur d'efficacité}
+        \[ \eta_E = \frac{\tanh(\phi)}{\phi} \]
+
+        \vspace{0.2em}
+        {\raggedright $\phi \ll 1$ : diffusion rapide, concentration uniforme\\
+        $\phi \gg 1$ : réaction rapide, chute près de l'interface\par}
+      \end{pcbanner}
+
+  \end{columns}
+
+\end{frame}
+
+%--------------------------------------------------------------------------------
+
+\begin{frame}[t]{Annexe : conditions aux limites — électrochimie}
+  \vspace{-0.5em}
+
+  \begin{columns}[T,onlytextwidth]
+
+    \column{0.5\textwidth}
+      \begin{pcbanner}{Système homogénéisé 1D}
+        \centering\scriptsize
+        \textbf{Collecteur de courant}
+        \[ \langle N_i\rangle^l\!\cdot\!n = 0, \quad
+           n\!\cdot\!\nabla\langle\varphi_l\rangle^l = 0, \quad
+           \langle\varphi_s\rangle^s = E \]
+
+        \vspace{0.3em}
+        \textbf{Interface pore / milieu homogène}
+        \[ \langle C_i\rangle^l = C_i^{\mathrm{hom}}, \quad
+           \langle\varphi_l\rangle^l = \varphi_l^{\mathrm{hom}} \]
+        \[ n\!\cdot\!\big(\varepsilon_s\sigma^{\mathrm{eff}}
+           \nabla\langle\varphi_s\rangle^s\big) = 0 \]
+      \end{pcbanner}
+
+    \column{0.5\textwidth}
+      \vspace{-0.5em}
+      \begin{pcbanner}{Cas simplifié \ch{CO2 -> CO}}
+        \centering\scriptsize
+        \textbf{Concentration imposée au bulk ($\zeta = 0$)}
+        \[ \langle C_{\ch{CO2}}\rangle^l(0) = C^{\mathrm{hom}}_{\ch{CO2}}, \quad
+           \langle C_{\ch{CO}}\rangle^l(0) = C^{\mathrm{hom}}_{\ch{CO}} \]
+
+        \vspace{0.3em}
+        \textbf{Flux nul à la paroi ($\zeta = -1$)}
+        \[ \frac{\mathrm{d}\langle C_{\ch{CO2}}\rangle^l}{\mathrm{d}\zeta}(-1) = 0, \quad
+           \frac{\mathrm{d}\langle C_{\ch{CO}}\rangle^l}{\mathrm{d}\zeta}(-1) = 0 \]
+      \end{pcbanner}
+
+  \end{columns}
+
 \end{frame}
 
 \end{document}
