@@ -1,0 +1,171 @@
+% -------------------------------------- Modèles : Partie électrochimique -----------------------------------------
+
+\begin{frame}[t]{Modèles : partie électrochimique}
+  \vspace{-1em}
+
+  \begin{columns}[T,onlytextwidth]
+
+    % ----------- Schéma -----------
+    \column{0.48\textwidth}
+      \begin{pccard}
+        \centering
+        \figschemaelectrochimique
+        \vspace{0.5em}
+        {\scriptsize\bfseries\color{pcNavy}
+        Représentation de la partie électrochimique}
+      \end{pccard}
+
+    % ----------- Différents angles d'approche -----------
+    \column{0.48\textwidth}
+      \vspace{-0.5em}
+      \begin{pcbanner}{Différents angles d'approche}
+
+        %\vspace{-0.25em}
+
+        \begin{pcbannerlight}{Apport du CO2}
+          \vspace{0.3em}
+          \begin{itemize}\footnotesize
+                \item Bullage dans l'électrolyte 
+                \item Electrode à diffusion de gaz (GDE)
+          \end{itemize}
+        \end{pcbannerlight}
+
+        \vspace{-0.5em}
+
+        \begin{pcbannerlight}{Géométrie de l'électrode}
+          \vspace{0.3em}
+          \begin{itemize}\footnotesize
+            \item Modèle 3D local 
+            \item Modèle 1D macroscopique
+          \end{itemize}
+        \end{pcbannerlight}
+
+      \end{pcbanner}
+    \end{columns}
+
+
+    \vspace{-0.75em}
+    \begin{columns}[T,onlytextwidth]
+      \column{\textwidth}
+        \begin{pcbanner}{Démarche}
+          \begin{itemize}\footnotesize
+            \item Comparer 1D et 3D (homogénéisation)
+            \item Comparer les deux configurations (électrode à diffusion de gaz / bullage dans l'électrolyte)
+            \item Confronter à l'expérimental (partenaires GASPER)
+          \end{itemize}
+        \end{pcbanner}
+    \end{columns}
+
+\end{frame}
+
+
+%--------------------------------------------------------------------
+\begin{frame}[t]{Modèles : partie électrochimique}
+  \vspace{-1em}
+
+  \begin{columns}[T,onlytextwidth]
+
+    % ----------- Schéma (inchangé) -----------
+     \column{0.48\textwidth}
+      \begin{pccard}
+        \centering
+        \figschemaelectrochimique
+        \begin{tikzpicture}[remember picture, overlay]
+          \draw[pcSun, line width=1.5pt]
+            ([xshift=-4.35cm, yshift=0.91cm]current page.center)
+            ellipse [x radius=0.6cm, y radius=1.1cm];
+        \end{tikzpicture}
+        \vspace{0.5em}
+        {\scriptsize\bfseries\color{pcNavy}
+        Représentation de la partie électrochimique}
+      \end{pccard}
+
+      \begin{pcbanner}{Réduction du \ch{CO2}}
+      \centering\scriptsize
+      \textbf{Équation de réaction}
+      \[ \mathrm{CO_2} + 2\,\mathrm{H^+} + 2\,\mathrm{e^-} \rightarrow \mathrm{CO} + \mathrm{H_2O} \]
+      \end{pcbanner}
+
+    % ----------- Modèle électrochimique -----------
+    \column{0.48\textwidth}
+      \vspace{-0.5em}
+        \begin{pcbanner}{Modèle dans le milieu poreux}
+        \vspace{0.4em}
+        \centering\scriptsize
+        \textbf{Équation de conservation}
+        \[ \frac{\partial C_i}{\partial t} + \nabla\!\cdot\! N_i = 0 \]
+        \textbf{Transport des espèces (Nernst--Planck)}
+        \[ N_i = -D_i\nabla C_i - \frac{z_i F}{RT}\,D_i C_i\,\nabla\varphi_l + C_i\,\vec{v} \]
+
+        \textbf{Électroneutralité} \qquad \textbf{Transport électronique (Ohm)}
+        \[ \sum_i z_i C_i = 0 \qquad \qquad \qquad \nabla\!\cdot\!\left(-\sigma_s\,\nabla\varphi_s\right) = 0 \]
+
+        \textbf{Cinétique interfaciale}\\[0.3em]
+        \begin{itemize}\scriptsize
+          \item Butler--Volmer (semi-empirique)
+          \item Marcus--Gerischer (théorique)
+        \end{itemize}
+        \end{pcbanner}
+
+    \end{columns}
+
+\end{frame}
+
+%--------------------------------------------------------------------
+\begin{frame}[t]{Electrochimie : cas simplifié \ch{CO2} -> \ch{CO}}
+  \vspace{-1em}
+
+  \begin{columns}[T,onlytextwidth]
+
+    % ----------- Colonne gauche : hypothèses -----------
+      \column{0.48\textwidth}
+\vspace{-0.5em}
+
+   \begin{pcbanner}{Module de Thiele $\phi$}
+        \footnotesize
+        Compétition diffusion / réaction :
+        \begin{itemize}\footnotesize
+        \item $\phi \ll 1$ : diffusion rapide $\rightarrow$ concentration uniforme
+        \item $\phi \gg 1$ : réaction rapide $\rightarrow$ \ch{CO2} consommé près de l'interface
+        \end{itemize}
+      \end{pcbanner}
+
+      \begin{pcbanner}{Hypothèses (approche de Thiele)}
+        \vspace{0.15em}
+        \begin{itemize}\footnotesize
+          \item Régime stationnaire, transport purement diffusif
+          \item Migration, convection, chute ohmique négligées
+          \item Deux espèces carbonées seulement : \ch{CO2}, \ch{CO}
+          \item Réaction globale simplifiée \ch{CO2 -> CO}
+        \end{itemize}
+      \end{pcbanner}
+
+    % ----------- Colonne droite : modèle + solution -----------
+    \column{0.48\textwidth}
+      \vspace{-0.5em}
+      \begin{pcbanner}{Système diffusion--réaction}
+        \centering\scriptsize
+       \textbf{Forme adimensionnée (module de Thiele $\phi$)}
+        \[ \frac{\mathrm{d}^2 \langle C_{\ch{CO2}}\rangle^l}{\mathrm{d}\zeta^2}
+           = \phi^2\, \langle C_{\ch{CO2}}\rangle^l \]
+        \[ \frac{\mathrm{d}^2 \langle C_{\ch{CO}}\rangle^l}{\mathrm{d}\zeta^2}
+           = -\,\frac{a_v^{\mathrm{cat}}\, k\, l_e^2}{\varepsilon_l D^{\mathrm{eff}}_{\ch{CO}}}
+             \, \langle C_{\ch{CO2}}\rangle^l \]
+      \end{pcbanner}
+
+      \begin{pcbanner}{Solution analytique}
+        \vspace{-0.5em}
+        \centering\scriptsize
+        \[ \langle C_{\ch{CO2}}\rangle_l(\zeta)
+           = C^{\mathrm{hom}}_{\ch{CO2}}\,
+             \frac{\cosh[\phi(\zeta+1)]}{\cosh(\phi)} \]
+        \[ \langle C_{\ch{CO}}\rangle_l(\zeta)
+           = C^{\mathrm{hom}}_{\ch{CO}}
+           + \frac{D^{\mathrm{eff}}_{\ch{CO2}}}{D^{\mathrm{eff}}_{\ch{CO}}}
+             \,C^{\mathrm{hom}}_{\ch{CO2}}
+             \left[1 - \frac{\cosh[\phi(\zeta+1)]}{\cosh(\phi)}\right] \]
+      \end{pcbanner}
+
+    \end{columns}
+
+\end{frame}

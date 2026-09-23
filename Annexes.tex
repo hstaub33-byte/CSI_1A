@@ -1,0 +1,182 @@
+%==================================================================================================================
+%==================================================== Différentes recombinaisons =======================================================
+%==================================================================================================================
+
+\begin{frame}[t]{Différentes types de recombinaisons}
+  \vspace{-0.5em}
+  \centering
+      \begin{pccard}
+        \centering
+        \figrecombinaison
+        \vspace{0.5em}
+        {\scriptsize\bfseries\color{pcNavy}
+        Différents types de recombinaisons : SRH, radiative et Auger}
+      \end{pccard}
+\end{frame}
+
+%------------------------------------------------------------------------------------------------------------------
+
+\begin{frame}[t]{Annexe : conditions aux limites — semi-conducteur}
+  \vspace{-0.5em}
+
+  \begin{columns}[T,onlytextwidth]
+
+    \column{0.48\textwidth}
+      \begin{pcbanner}{Contacts ohmiques (retenu)}
+        \centering\scriptsize
+        \textbf{Poisson : Dirichlet sur le potentiel}
+        \[ \psi = \psi_0 + U_{\mathrm{app}} \]
+        {\raggedright tension appliquée répartie symétriquement sur les deux contacts\par}
+        \vspace{0.4em}
+        \textbf{Densités : valeurs d'équilibre figées}
+        \[ n = n_{\mathrm{eq}}, \qquad p = p_{\mathrm{eq}} \]
+        {\raggedright nœuds de bord non mis à jour par le schéma temporel\par}
+      \end{pcbanner}
+
+    \column{0.48\textwidth}
+      \begin{pcbanner}{Recombinaison de surface finie (perspective)}
+        \begin{itemize}\footnotesize
+          \item Hypothèse actuelle : contacts ohmiques idéaux (forte)
+          \item Alternative : conditions de \textbf{Robin}
+          \item Permet une recombinaison de surface finie aux contacts
+          \item Objet de comparaison à venir
+        \end{itemize}
+      \end{pcbanner}
+
+  \end{columns}
+
+\end{frame}
+%----------------------------------------------------------------------------------------
+
+\begin{frame}[t]{Modèle 1D homogénéisé}
+  \vspace{-0.5em}
+
+  \begin{columns}[T,onlytextwidth]
+
+    \column{0.46\textwidth}
+      \begin{pccard}
+        \centering
+        \figschemaelectrochimique
+        \vspace{0.4em}
+        {\scriptsize\bfseries\color{pcNavy}
+        Prise de moyenne volumique : 3D pore $\rightarrow$ 1D électrode}
+      \end{pccard}
+
+      \begin{pcbanner}{Principe}
+        \begin{itemize}\footnotesize
+          \item Moyenne sur un volume élémentaire représentatif
+          \item Microstructure incorporée dans des coefficients effectifs
+          \item Fermeture par vecteurs $b$, $d$, $e$
+        \end{itemize}
+      \end{pcbanner}
+
+    \column{0.52\textwidth}
+      \vspace{-0.5em}
+      \begin{pcbanner}{Système homogénéisé}
+        \centering\scriptsize
+        \textbf{Conservation des espèces}
+        \[ \varepsilon_l\frac{\partial \langle C_i\rangle^l}{\partial t}
+           = \nabla\!\cdot\!\Big[ D_i^{\mathrm{tot}}\nabla\langle C_i\rangle^l
+           + \tfrac{z_i F}{RT}\varepsilon_l D_i^{\mathrm{eff,mig}}
+             \langle C_i\rangle^l \nabla\langle\varphi_l\rangle^l
+           - \varepsilon_l \langle C_i\rangle^l \langle v\rangle^l \Big]
+           + a_v^{\mathrm{cat}} R_i \]
+
+        \textbf{Électroneutralité}
+        \[ \sum_i z_i \langle C_i\rangle^l = 0 \]
+
+        \textbf{Loi d'Ohm (phase solide)}
+        \[ \nabla\!\cdot\!\big(\varepsilon_s \sigma^{\mathrm{eff}}
+           \nabla\langle\varphi_s\rangle^s\big) = -\,a_v^{\mathrm{cat}}\, j \]
+
+        \vspace{0.3em}
+        \textbf{Coefficients effectifs}\\[0.2em]
+        $D_i^{\mathrm{tot}} = \varepsilon_l D_i^{\mathrm{eff}} + D^{\mathrm{disp}}$,
+        \quad $\sigma^{\mathrm{eff}}$, \quad $a_v^{\mathrm{cat}} = \theta a_v$
+      \end{pcbanner}
+
+  \end{columns}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\begin{frame}[t]{Annexe : réduction au module de Thiele}
+  \vspace{-0.5em}
+
+  \begin{columns}[T,onlytextwidth]
+
+    \column{0.48\textwidth}
+      \begin{pcbanner}{Hypothèses successives}
+        \begin{itemize}\footnotesize
+          \item Régime stationnaire
+          \item Convection négligée ($\langle v\rangle^l = 0$)
+          \item Migration négligée
+          \item Potentiel solide uniforme ($\nabla\langle\varphi_s\rangle^s = 0$)
+          \item Cinétique du 1\textsuperscript{er} ordre (Butler--Volmer linéarisée)
+        \end{itemize}
+      \end{pcbanner}
+
+    \column{0.48\textwidth}
+      \vspace{-0.5em}
+      \begin{pcbanner}{Équation de diffusion--réaction}
+        \centering\scriptsize
+        \[ \frac{\mathrm{d}^2 \langle C_i\rangle^{l,*}}{\mathrm{d}\zeta^2}
+           = \phi^2\, \langle C_i\rangle^{l,*} \]
+
+        \textbf{Module de Thiele}
+        \[ \phi^2 = -\,\frac{\nu_i\, a_v^{\mathrm{cat}}\, k(\eta)\, l_e^2}
+                          {n_e F\, \varepsilon_l D_i^{\mathrm{eff}}} \]
+
+        \textbf{Facteur d'efficacité}
+        \[ \eta_E = \frac{\tanh(\phi)}{\phi} \]
+
+        \vspace{0.2em}
+        {\raggedright $\phi \ll 1$ : diffusion rapide, concentration uniforme\\
+        $\phi \gg 1$ : réaction rapide, chute près de l'interface\par}
+      \end{pcbanner}
+
+  \end{columns}
+
+\end{frame}
+
+%--------------------------------------------------------------------------------
+
+\begin{frame}[t]{Annexe : conditions aux limites — électrochimie}
+  \vspace{-0.5em}
+
+  \begin{columns}[T,onlytextwidth]
+
+    \column{0.5\textwidth}
+      \begin{pcbanner}{Système homogénéisé 1D}
+        \centering\scriptsize
+        \textbf{Collecteur de courant}
+        \[ \langle N_i\rangle^l\!\cdot\!n = 0, \quad
+           n\!\cdot\!\nabla\langle\varphi_l\rangle^l = 0, \quad
+           \langle\varphi_s\rangle^s = E \]
+
+        \vspace{0.3em}
+        \textbf{Interface pore / milieu homogène}
+        \[ \langle C_i\rangle^l = C_i^{\mathrm{hom}}, \quad
+           \langle\varphi_l\rangle^l = \varphi_l^{\mathrm{hom}} \]
+        \[ n\!\cdot\!\big(\varepsilon_s\sigma^{\mathrm{eff}}
+           \nabla\langle\varphi_s\rangle^s\big) = 0 \]
+      \end{pcbanner}
+
+    \column{0.5\textwidth}
+      \vspace{-0.5em}
+      \begin{pcbanner}{Cas simplifié \ch{CO2 -> CO}}
+        \centering\scriptsize
+        \textbf{Concentration imposée au bulk ($\zeta = 0$)}
+        \[ \langle C_{\ch{CO2}}\rangle^l(0) = C^{\mathrm{hom}}_{\ch{CO2}}, \quad
+           \langle C_{\ch{CO}}\rangle^l(0) = C^{\mathrm{hom}}_{\ch{CO}} \]
+
+        \vspace{0.3em}
+        \textbf{Flux nul à la paroi ($\zeta = -1$)}
+        \[ \frac{\mathrm{d}\langle C_{\ch{CO2}}\rangle^l}{\mathrm{d}\zeta}(-1) = 0, \quad
+           \frac{\mathrm{d}\langle C_{\ch{CO}}\rangle^l}{\mathrm{d}\zeta}(-1) = 0 \]
+      \end{pcbanner}
+
+  \end{columns}
+
+\end{frame}

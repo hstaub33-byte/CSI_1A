@@ -1,0 +1,112 @@
+% -------------------------------------- Modèles : Partie photovoltaïque ------------------------------------------
+\begin{frame}[t]{Modèles : partie photovoltaïque}
+
+  \vspace{-1em}
+
+  \begin{columns}[T,onlytextwidth]
+
+    % ----------- Schéma -----------
+    \column{0.48\textwidth}
+\begin{pccard}
+  \centering
+  \figschemaphotovoltaique
+  {\scriptsize\bfseries\color{pcNavy}
+   Représentation de la partie photovoltaïque}
+\end{pccard}
+
+
+\begin{pcbanner}{Démarche}
+  \begin{itemize}\footnotesize
+    \item Résolution 1D du système couplé
+    \item Comparer aux résultats de SCAPS-1D
+    \item Confronter à l'expérimental (ANR)
+  \end{itemize}
+\end{pcbanner}
+
+    % ----------- Approches -----------
+    
+        \column{0.48\textwidth}
+\vspace{-0.5em}
+\begin{pcbanner}{Approche cinétique}
+  \vspace{0.45em}
+  \begin{pcbannerlight}{Principe}
+    \vspace{0.3em}
+    \begin{itemize}\footnotesize
+      \item Suivi local des porteurs et du potentiel électrostatique
+      \item Poisson + équations de continuité
+      \item Transport par dérive--diffusion
+    \end{itemize}
+  \end{pcbannerlight}
+
+  \vspace{0.35em}
+
+  \begin{pcbannerlight}{Physique prise en compte}
+    \vspace{0.3em}
+    \begin{itemize}\footnotesize
+      \item Photogénération (électromagnétisme ou radiatif)
+      \item Recombinaisons : SRH, Auger, radiative
+      \item Hétérojonction CIGS/CdS/ZnO
+    \end{itemize}
+  \end{pcbannerlight}
+  \vspace{0.2em}
+\end{pcbanner}
+
+  \end{columns}
+
+
+\end{frame}
+
+%------------------------------------------------------------------------
+
+\begin{frame}[t]{Modèles : partie photovoltaïque}
+
+  \vspace{-1em}
+
+  \begin{columns}[T,onlytextwidth]
+
+    % ----------- Schéma -----------
+    \column{0.48\textwidth}
+\begin{pccard}
+  \centering
+  \figschemaphotovoltaique
+
+  {\scriptsize\bfseries\color{pcNavy}
+   Représentation de la partie photovoltaïque}
+\end{pccard}
+
+
+\begin{pcbanner}{Photogénération}
+      \centering\scriptsize
+      \textbf{Photogénération (Bouguer--Lambert--Beer)}
+      \[ G(x) = q_0\,k_a\,e^{-k_a x} \]
+      \end{pcbanner}
+
+    % ----------- Approches -----------
+    
+    \column{0.48\textwidth}
+\vspace{-0.5em}
+    \begin{pcbanner}{Système de Van Roosbroeck}
+      \vspace{0.3em}
+      \centering\scriptsize
+
+      \textbf{Équation de Poisson}
+      \[ -\nabla\!\cdot\!\left(\varepsilon\,\nabla\psi\right) = q\,(C + p - n) \]\\
+
+\vspace{1em}
+      \textbf{Équations de continuité}
+      \[ \frac{\partial n}{\partial t} = \frac{1}{q}\,\nabla\!\cdot\!\vec{J}_n - R + G_{th} + G_{ph} \]
+      \[ \frac{\partial p}{\partial t} = -\frac{1}{q}\,\nabla\!\cdot\!\vec{J}_p - R + G_{th} + G_{ph} \]\\
+
+\vspace{1em}
+      \textbf{Densités de courant (dérive-diffusion)}
+      \[ \vec{J}_n = q\,\mu_n\!\left(-n\,\nabla\psi + U_t\,\nabla n\right) \]
+      \[ \vec{J}_p = q\,\mu_p\!\left(-p\,\nabla\psi - U_t\,\nabla p\right) \]\\
+\vspace{1em}
+      \textbf{CL Robin ou Ohmique}
+       \vspace{-0.5em}
+    \end{pcbanner}
+
+  \end{columns}
+
+
+\end{frame}

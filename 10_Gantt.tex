@@ -1,0 +1,98 @@
+% ====================================================================
+% ====================================================================
+% ====================================================================
+%  Frame Gantt (échelle en MOIS) — Calendrier prévisionnel de la thèse
+%  PRÉREQUIS dans le préambule :  \usepackage{pgfgantt}
+%
+%  Chaque case = 1 mois. L'axe démarre en NOVEMBRE 2025 (mois 1) et
+%  couvre 36 mois (nov 2025 -> oct 2028). La 1re ligne = année de thèse
+%  (nov->oct), la 2e = initiale du mois (N D J F M A M J J A S O).
+%  Le trait pointillé orange = position actuelle (~ sept 2026, mois 11).
+%  NB : les nombres des \ganttbar sont des indices de mois, 1 = nov 2025.
+% ====================================================================
+
+\section{Gantt : calendrier prévisionnel}
+\begin{frame}[t]{Calendrier prévisionnel}
+
+  \vspace{-2em}
+  \begin{pccard}
+    % Cale le graphe à gauche (au lieu de le centrer) : la marge négative
+    % remonte les intitulés vers le bord gauche. Ajuste -1.2cm si besoin.
+    \noindent\hspace*{-0.55cm}%
+        \begin{ganttchart}[
+        x unit=0.7cm,
+        hgrid, vgrid={*3{draw=gray!12}, *1{draw=gray!25}},
+        canvas/.style={draw=gray!40, line width=.5pt},
+        y unit title=0.38cm, y unit chart=0.38cm,
+        title height=1, title/.style={fill=none},
+        title label font=\tiny\bfseries\color{pcNavy},
+        group label font=\scriptsize\bfseries\color{pcNavy},
+        bar label font=\scriptsize\color{pcNavy!80},
+        group label node/.append style={left=0.15cm},
+        bar label node/.append style={left=0.4cm},
+        group/.append style={draw=none, fill=pcNavy!70},
+        group height=.5, group peaks tip position=0,
+        bar/.append style={draw=none, fill=pcBlue!75}, bar height=.6,
+      ]{1}{12}
+
+      % --- Bandeau 1 : année de thèse ---
+      \gantttitle{Année 1 (2025--26)}{4}
+      \gantttitle{Année 2 (2026--27)}{4}
+      \gantttitle{Année 3 (2027--28)}{4}                       \\
+      % --- Bandeau 2 : trimestres ---
+      \gantttitle{T1}{1}\gantttitle{T2}{1}\gantttitle{T3}{1}\gantttitle{T4}{1}%
+      \gantttitle{T1}{1}\gantttitle{T2}{1}\gantttitle{T3}{1}\gantttitle{T4}{1}%
+      \gantttitle{T1}{1}\gantttitle{T2}{1}\gantttitle{T3}{1}\gantttitle{T4}{1} \\
+
+      % ---------- Brique photovoltaïque ----------
+      \ganttgroup{Semi-conducteur}{1}{7}                       \\
+      \ganttbar{Solveur 1D (Van Roosbroeck)}{1}{7}             \\
+      \ganttbar{Validation (Farrell, SCAPS)}{3}{7}             \\
+      \ganttbar[bar/.append style={fill=pcSun!70}]%
+               {Hétérojonctions \& CL de Robin}{5}{6}          \\
+      \ganttbar[bar/.append style={fill=pcSun!70}]%
+               {Validation données ANR}{7}{9}                  \\
+
+      % ---------- Brique électrochimique ----------
+      \ganttgroup{Électrochimie}{2}{9}                         \\
+      \ganttbar{Modèle 3D $\rightarrow$ 1D (homogénéisation)}{2}{4} \\
+      \ganttbar[bar/.append style={fill=pcSun!70}]%
+               {Implémentation + modèle GDE}{5}{8}             \\
+      \ganttbar[bar/.append style={fill=pcSun!70}]%
+               {Validation données ANR}{8}{9}                  \\
+
+      % ---------- Nouvelles briques ----------
+      \ganttgroup{Nouvelles briques}{5}{8}                     \\
+      \ganttbar[bar/.append style={fill=pcSun!70}]%
+               {Photogénération}{5}{8}  \\
+      \ganttbar[bar/.append style={fill=pcSun!70}]%
+               {\textit{Detailed balance}}{7}{9}               \\
+
+      % ---------- Couplage & optimisation ----------
+      \ganttgroup{Couplage \& optimisation}{9}{12}             \\
+      \ganttbar[bar/.append style={fill=pcSun!70}]%
+               {Couplage des briques}{9}{11}                   \\
+      \ganttbar[bar/.append style={fill=pcSun!70}]%
+               {Outil d'optimisation}{10}{12}                  \\
+
+      % ---------- Rédaction ----------
+      \ganttbar[bar/.append style={fill=pcNavy!55}]%
+               {Rédaction \& soutenance}{10}{12}               \\
+
+      % ---------- Ligne "aujourd'hui" (~ sept. 2026, milieu du T4 année 1) ----------
+      \ganttvrule[vrule/.style={pcSunDeep, line width=1pt, dashed},
+                  vrule offset=0.5]%
+                 {}{4}
+
+    \end{ganttchart}
+
+    \vspace{0.2em}
+    \centering
+    {\scriptsize\bfseries\color{pcNavy}
+     Planning prévisionnel sur les trois années de thèse — %
+     \textcolor{pcBlue!75}{$\blacksquare$}~réalisé \quad
+     \textcolor{pcSun!70!black}{$\blacksquare$}~à venir \quad
+     \textcolor{pcSunDeep}{$\dashv$}~aujourd'hui}
+  \end{pccard}
+
+\end{frame}

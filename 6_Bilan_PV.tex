@@ -1,0 +1,75 @@
+% --------------------------------------- Bilan : Brique photovoltaïque -------------------------------------------
+
+\begin{frame}[t]{Bilan : brique photovoltaïque}
+  \vspace{0.3em}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.48\textwidth}
+      \begin{pcbanner}{Avancées}
+        \begin{itemize}\footnotesize
+          \item Solveur 1D en C : Poisson + deux continuités
+          \item Génération Bouger
+          \item Recombinaisons SRH, Auger, radiatif
+          \item Recherche sur l'hétérojonction CIGS/CdS/ZnO
+          \item Recherche sur des CL plus réalistes
+        \end{itemize}
+      \end{pcbanner}
+    \column{0.48\textwidth}
+      \begin{pcbanner}{Jalons clés}
+        \begin{itemize}\footnotesize
+          \item 1\textsuperscript{re} version : Newton stationnaire, adimensionnée
+          \item Comparaison sans génération réussi avec Farrell \textit{et al.}
+          \item Blocage à la photogénération
+          \item Levé par passage en résolution transitoire
+          \item Comparaison réussi pour l'homojonction et CL ohmique avec et sans génération
+        \end{itemize}
+      \end{pcbanner}
+  \end{columns}
+
+  \vspace{0.3em}
+  \begin{columns}[T,onlytextwidth]
+    \column{\textwidth}
+      \begin{pcbanner}{Validation}
+        \begin{itemize}\footnotesize
+          \item Cas sans génération : accord avec Farrell \textit{et al.}
+          \item Cas avec génération (ohmique et homojonctions) : accord avec SCAPS 1D 
+        \end{itemize}
+      \end{pcbanner}
+  \end{columns}
+\end{frame}
+
+ \begin{frame}[t]{Brique photovoltaïque : validation}
+   \vspace{-0.5em}
+   \centering
+   \begin{pccard}
+     \centering
+     \begin{tikzpicture}
+      \begin{axis}[
+        width=0.9\linewidth, height=0.72\textheight,
+        xlabel={$x$ ($\mu$m)},
+        ylabel={Densités de porteurs ($\mathrm{m^{-3}}$)},
+        ymode=log,
+        legend pos=outer north east,
+        legend style={font=\scriptsize, cells={anchor=west}},
+        grid=both, grid style={gray!20},
+        tick label style={font=\scriptsize},
+        label style={font=\scriptsize},
+      ]
+        % --- Électrons n ---
+         \addplot[pcNavy, only marks, mark=o, mark size=1.1pt, each nth point=4]
+                 table[x=x, y=n_scaps, col sep=semicolon] {donnees1.csv};
+         \addlegendentry{$n$ (code)}
+         \addplot[pcNavy, thick] table[x=x, y=n_code, col sep=semicolon] {donnees1.csv};
+         \addlegendentry{$n$ (SCAPS)}
+        % % --- Trous p ---
+        \addplot[pcSunDeep, only marks, mark=square, mark size=1.1pt, each nth point=4]
+                 table[x=x, y=p_scaps, col sep=semicolon] {donnees1.csv};
+        \addlegendentry{$p$ (code)}
+        \addplot[pcSunDeep, thick] table[x=x, y=p_code, col sep=semicolon] {donnees1.csv};
+        \addlegendentry{$p$ (SCAPS)}
+        \end{axis}
+     \end{tikzpicture}
+
+     {\scriptsize\bfseries\color{pcNavy}
+      Densités de porteurs en fonction de la position : comparaison code / SCAPS-1D pour CIGS dopé n/CIGS dopé p avec photogénération}
+   \end{pccard}
+ \end{frame}
