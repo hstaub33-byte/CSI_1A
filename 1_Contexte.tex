@@ -20,9 +20,10 @@
     \end{minipage}}
   \begin{columns}[T,onlytextwidth]
     \column{0.32\textwidth}
-      \usebox{\cardbox}
+      \onslide<2->{\usebox{\cardbox}}
     \column{0.66\textwidth}
       \vspace*{-0.55cm}
+      \onslide<1->{%
         \begin{pcbanner}{Un double enjeu : carbone et énergie}
           \begin{itemize}\footnotesize
             \item Demande énergétique mondiale croissante
@@ -31,31 +32,32 @@
             \item Valoriser le \ch{CO2} en molécules d'intérêt
                   $\rightarrow$ stockage de l'énergie solaire sous forme chimique
           \end{itemize}
-        \end{pcbanner}
+        \end{pcbanner}}
   \end{columns}
 
   % ---------- Deuxième ligne : schéma (gauche, large) + GASPER -------
   \vspace{0.5em}
   \begin{columns}[T,onlytextwidth]
     \column{0.56\textwidth}
-      \begin{pcbanner}{Du \ch{CO2} aux carburants}
-        \centering
-        \includegraphics[width=0.98\linewidth]{schema_contexte.png}
-      \end{pcbanner}
+      \onslide<3->{%
+        \begin{pcbanner}{Du \ch{CO2} aux carburants}
+          \centering
+          \includegraphics[width=0.98\linewidth]{schema_contexte.png}
+        \end{pcbanner}}
     \column{0.42\textwidth}
-\begin{pcbanner}{Projet ANR GASPER}
-  \vspace{0.25em}
-  \begin{itemize}\footnotesize
-    \item Réduire le \ch{CO2} en \ch{CO} à l'aide d'une photocathode
-    \item 6 laboratoires impliqués
-    \item Élaboration, caractérisation et tests des photoélectrodes
-    \item Objectifs : efficacité et sélectivité
-  \end{itemize}
-  \vspace{0.25em}
-\end{pcbanner}
+      \onslide<4->{%
+        \begin{pcbanner}{Projet ANR GASPER}
+          \vspace{0.25em}
+          \begin{itemize}\footnotesize
+            \item Réduire le \ch{CO2} en \ch{CO} à l'aide d'une photocathode
+            \item 6 laboratoires impliqués
+            \item Élaboration, caractérisation et tests des photoélectrodes
+            \item Objectifs : efficacité et sélectivité
+          \end{itemize}
+          \vspace{0.25em}
+        \end{pcbanner}}
   \end{columns}
 \end{frame}
-
 %==================================================================================================================
 %============================================= Fin Contexte =======================================================
 %==================================================================================================================

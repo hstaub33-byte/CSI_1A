@@ -7,9 +7,9 @@
       \begin{pcbanner}{Avancées}
         \begin{itemize}\footnotesize
           \item Solveur 1D en C : Poisson + deux continuités
-          \item Génération Bouger
+          \item Génération Bouguer
           \item Recombinaisons SRH, Auger, radiatif
-          \item Recherche sur l'hétérojonction CIGS/CdS/ZnO
+          \item Recherche sur l'hétérojonction CIGS/ZnO/CdS
           \item Recherche sur des CL plus réalistes
         \end{itemize}
       \end{pcbanner}
@@ -20,7 +20,7 @@
           \item Comparaison sans génération réussi avec Farrell \textit{et al.}
           \item Blocage à la photogénération
           \item Levé par passage en résolution transitoire
-          \item Comparaison réussi pour l'homojonction et CL ohmique avec et sans génération
+          \item Comparaison réussie pour l'homojonction et CL ohmique avec et sans génération
         \end{itemize}
       \end{pcbanner}
   \end{columns}
@@ -46,7 +46,7 @@
       \begin{axis}[
         width=0.9\linewidth, height=0.72\textheight,
         xlabel={$x$ ($\mu$m)},
-        ylabel={Densités de porteurs ($\mathrm{m^{-3}}$)},
+        ylabel={Densités de porteurs ($\mathrm{cm^{-3}}$)},
         ymode=log,
         legend pos=outer north east,
         legend style={font=\scriptsize, cells={anchor=west}},
@@ -72,4 +72,6 @@
      {\scriptsize\bfseries\color{pcNavy}
       Densités de porteurs en fonction de la position : comparaison code / SCAPS-1D pour CIGS dopé n/CIGS dopé p avec photogénération}
    \end{pccard}
+
+    {\tiny\color{pcNavy!60} Sources : SCAPS-1D, Burgelman \textit{et al.} (2000)}
  \end{frame}
